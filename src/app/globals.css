@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0f1a; /* koyu lacivert/siyah taban */
+  --foreground: #e6f0ff; /* açık mavi-beyaz metin */
+  --primary: #1e3a8a;    /* mavi (tailwind blue-800) */
+  --primary-600: #2563eb; /* blue-600 aksan */
+  --muted: #0b1220;
+  --card: #0f172a;       /* slate-900/blue-very dark */
+  --border: #1f2a44;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-600: var(--primary-600);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  scroll-behavior: smooth;
+}
+
+.container-page {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(30,58,138,0.18), rgba(12,18,32,0.6));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.btn-primary {
+  background: var(--primary-600);
+  color: #fff;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  transition: transform 120ms ease, opacity 120ms ease, background 120ms ease;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8; /* blue-700 */
+  transform: translateY(-1px);
+}
