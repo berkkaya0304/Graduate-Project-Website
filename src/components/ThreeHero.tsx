@@ -2,9 +2,10 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
+import * as THREE from "three";
 
 function SpinningIcosahedron() {
-  const ref = useRef<any>(null);
+  const ref = useRef<THREE.Mesh>(null);
   useFrame((state, delta) => {
     if (ref.current) {
       ref.current.rotation.x += delta * 0.3;

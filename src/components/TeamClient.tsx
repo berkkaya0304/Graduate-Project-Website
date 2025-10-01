@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
+import Image from "next/image";
 
 export type Member = {
   name: string;
@@ -79,7 +80,7 @@ export default function TeamClient({ members }: { members: Member[] }) {
             <select
               id="sort"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => setSortBy(e.target.value as "name" | "role")}
               className="bg-[var(--color-card)] border border-[var(--color-border)] rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-primary-600)]"
             >
               <option value="name">İsme göre</option>
@@ -114,10 +115,13 @@ export default function TeamClient({ members }: { members: Member[] }) {
           <article key={m.name} className="card p-5">
             <div className={view === "grid" ? "flex items-start gap-3" : "flex items-start gap-3"}>
               {m.avatarUrl ? (
-                <img
+                <Image
                   alt={m.name}
                   src={m.avatarUrl}
+                  width={48}
+                  height={48}
                   className="size-12 rounded-full bg-[var(--muted)] object-contain p-1"
+                  unoptimized
                 />
               ) : (
                 <div className="size-12 rounded-full bg-[var(--muted)] grid place-items-center text-sm opacity-80">
@@ -196,7 +200,7 @@ export default function TeamClient({ members }: { members: Member[] }) {
           >
             <div className="flex items-start gap-3">
               {selected.avatarUrl ? (
-                <img alt={selected.name} src={selected.avatarUrl} className="size-14 rounded-full bg-[var(--muted)] object-contain p-1" />
+                <Image alt={selected.name} src={selected.avatarUrl} width={56} height={56} className="size-14 rounded-full bg-[var(--muted)] object-contain p-1" unoptimized />
               ) : null}
               <div className="min-w-0">
                 <h2 className="text-xl font-semibold truncate">{selected.name}</h2>

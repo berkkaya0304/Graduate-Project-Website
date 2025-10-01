@@ -3,14 +3,15 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Billboard, Image as DreiImage, ScrollControls, useScroll, Text } from "@react-three/drei";
 import { teamMembers } from "@/data/team";
+import * as THREE from "three";
 
 type Member3D = typeof teamMembers[number];
 
 function MemberBillboard({ member, position, index }: { member: Member3D; position: [number, number, number]; index: number }) {
-  const ref = useRef<any>(null);
+  const ref = useRef<THREE.Group>(null);
   const scroll = useScroll();
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!ref.current) return;
     // Each member appears slightly later using scroll offset
     const appearAt = index / Math.max(1, teamMembers.length);
@@ -41,7 +42,7 @@ function MemberBillboard({ member, position, index }: { member: Member3D; positi
 }
 
 function TeamRig() {
-  const rig = useRef<any>(null);
+  const rig = useRef<THREE.Group>(null);
   const scroll = useScroll();
 
   const positions = useMemo(() => {
@@ -55,7 +56,7 @@ function TeamRig() {
     });
   }, []);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!rig.current) return;
     const offset = scroll.offset; // 0..1
     // Rotate the circle and dolly in as we scroll

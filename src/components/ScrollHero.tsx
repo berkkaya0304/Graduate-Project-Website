@@ -2,12 +2,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ScrollControls, useScroll, Scroll, OrbitControls } from "@react-three/drei";
+import * as THREE from "three";
 
 function SpinningShape() {
-  const ref = useRef<any>(null);
+  const ref = useRef<THREE.Mesh>(null);
   const scroll = useScroll();
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const t = state.clock.getElapsedTime();
     const offset = scroll.offset; // 0..1 across all pages
 

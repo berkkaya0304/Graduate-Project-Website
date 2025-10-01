@@ -3,6 +3,8 @@ import React, { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Billboard, Image as DreiImage, OrbitControls, Text } from "@react-three/drei";
 import { teamMembers } from "@/data/team";
+import * as THREE from "three";
+import Image from "next/image";
 
 type Member3D = typeof teamMembers[number];
 
@@ -12,7 +14,7 @@ function MemberBillboard({ member, position, selected, onSelect }: {
   selected: boolean;
   onSelect: () => void;
 }) {
-  const ref = useRef<any>(null);
+  const ref = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   useFrame((_, delta) => {
     if (!ref.current) return;
@@ -83,7 +85,7 @@ function TeamScene({ onSelect, selectedIndex }: { onSelect: (i: number) => void;
     });
   }, []);
 
-  const rig = useRef<any>(null);
+  const rig = useRef<THREE.Group>(null);
   useFrame((state) => {
     if (!rig.current) return;
     const t = state.clock.getElapsedTime();
@@ -124,7 +126,7 @@ export default function Team3D() {
           <div className="card p-4 backdrop-blur">
             <div className="flex items-start gap-3">
               {member.avatarUrl ? (
-                <img alt={member.name} src={member.avatarUrl} className="size-12 rounded-full bg-[var(--muted)] object-contain p-1" />
+                <Image alt={member.name} src={member.avatarUrl} width={48} height={48} className="size-12 rounded-full bg-[var(--muted)] object-contain p-1" unoptimized />
               ) : null}
               <div className="min-w-0">
                 <div className="flex items-center justify-between gap-4">

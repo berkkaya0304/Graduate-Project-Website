@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, Html, ScrollControls, useScroll, Scroll } from "@react-three/drei";
+import { ScrollControls, useScroll, Scroll } from "@react-three/drei";
 import * as THREE from "three";
 import { teamMembers } from "@/data/team";
+import Image from "next/image";
 
 function FlowFieldParticles() {
   const ref = useRef<THREE.Points>(null);
@@ -23,7 +24,7 @@ function FlowFieldParticles() {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    const obj = ref.current as any;
+    const obj = ref.current;
     if (!obj) return;
     const a = (obj.geometry.attributes.position.array as Float32Array);
     for (let i = 0; i < count; i++) {
@@ -59,10 +60,10 @@ function FlowFieldParticles() {
     const r = THREE.MathUtils.lerp(c1.r, c2.r, t);
     const g = THREE.MathUtils.lerp(c1.g, c2.g, t);
     const b = THREE.MathUtils.lerp(c1.b, c2.b, t);
-    (mat as any).color.setRGB(r, g, b);
+    mat.color.setRGB(r, g, b);
   });
 
-  return <points ref={ref} geometry={geom} material={mat as any} />;
+  return <points ref={ref} geometry={geom} material={mat} />;
 }
 
 // Wireframe sphere removed to eliminate straight lines in the background
@@ -158,7 +159,7 @@ export default function Full3DPageClient() {
                     {teamMembers.map((m) => (
                       <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3">
                         {m.avatarUrl ? (
-                          <img alt={m.name} src={m.avatarUrl} className="size-10 rounded-full bg-white/10 object-cover" />
+                          <Image alt={m.name} src={m.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
                         ) : (
                           <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
                             {m.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
