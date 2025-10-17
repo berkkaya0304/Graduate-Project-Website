@@ -117,79 +117,94 @@ export default function Full3DPageClient() {
             <p className="mt-2 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>Interdisciplinary collaboration and shared ownership.</p>
             <div className="mt-2 text-white/90 text-sm" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>Team members: <span className="font-medium text-white">{teamMembers.length}</span> • Advisor: <span className="font-medium text-white">{advisor ? 1 : 0}</span> • Jury: <span className="font-medium text-white">{juryMembers ? juryMembers.length : 0}</span></div>
             
-            <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {/* Main Team Members */}
-              {teamMembers.map((m) => (
-                <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
-                  {m.avatarUrl ? (
-                    <Image alt={m.name} src={m.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
-                  ) : (
-                    <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
-                      {m.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
-                    </div>
-                  )}
-                  <div className="min-w-0">
-                    <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.name}</div>
-                    <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.role}</div>
-                    {m.skills && m.skills.length ? (
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {m.skills.slice(0,4).map((s) => (
-                          <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
-                        ))}
+            {/* Main Team Members Section */}
+            <div className="mt-6">
+              <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👥 Takım Üyeleri</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {teamMembers.map((m) => (
+                  <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
+                    {m.avatarUrl ? (
+                      <Image alt={m.name} src={m.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
+                    ) : (
+                      <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
+                        {m.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
                       </div>
-                    ) : null}
-                  </div>
-                </div>
-              ))}
-              
-              {/* Advisor */}
-              {advisor && (
-                <div className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
-                  {advisor.avatarUrl ? (
-                    <Image alt={advisor.name} src={advisor.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
-                  ) : (
-                    <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
-                      {advisor.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
+                    )}
+                    <div className="min-w-0">
+                      <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.name}</div>
+                      <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.role}</div>
+                      {m.skills && m.skills.length ? (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {m.skills.slice(0,4).map((s) => (
+                            <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
-                  )}
-                  <div className="min-w-0">
-                    <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{advisor.name}</div>
-                    <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{advisor.role}</div>
-                    {advisor.skills && advisor.skills.length ? (
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {advisor.skills.slice(0,4).map((s) => (
-                          <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
-                        ))}
-                      </div>
-                    ) : null}
                   </div>
-                </div>
-              )}
-              
-              {/* Jury Members */}
-              {juryMembers && juryMembers.map((m) => (
-                <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
-                  {m.avatarUrl ? (
-                    <Image alt={m.name} src={m.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
-                  ) : (
-                    <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
-                      {m.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
-                    </div>
-                  )}
-                  <div className="min-w-0">
-                    <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.name}</div>
-                    <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.role}</div>
-                    {m.skills && m.skills.length ? (
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {m.skills.slice(0,4).map((s) => (
-                          <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+            
+            {/* Advisor Section */}
+            {advisor && (
+              <div className="mt-6">
+                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👨‍🏫 Danışman</h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
+                    {advisor.avatarUrl ? (
+                      <Image alt={advisor.name} src={advisor.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
+                    ) : (
+                      <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
+                        {advisor.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{advisor.name}</div>
+                      <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{advisor.role}</div>
+                      {advisor.skills && advisor.skills.length ? (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {advisor.skills.slice(0,4).map((s) => (
+                            <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Jury Members Section */}
+            {juryMembers && juryMembers.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>⚖️ Jüri Üyeleri</h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {juryMembers.map((m) => (
+                    <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
+                      {m.avatarUrl ? (
+                        <Image alt={m.name} src={m.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
+                      ) : (
+                        <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
+                          {m.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.name}</div>
+                        <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{m.role}</div>
+                        {m.skills && m.skills.length ? (
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {m.skills.slice(0,4).map((s) => (
+                              <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             </div>
           </div>
 
@@ -228,7 +243,7 @@ export default function Full3DPageClient() {
             <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 2px 8px rgba(0,0,0,0.5)"}}>Sustainable Development Goals</h2>
             <p className="mt-2 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>The project is framed through food safety and sustainable agriculture.</p>
             <div className="mt-4 flex flex-wrap gap-2">
-              {["Good Health and Well-Being (SDG 3)", "Responsible Consumption and Production (SDG 12)", "Zero Hunger (SDG 2)", "Industry, Innovation and Infrastructure (SDG 9)"].map((s) => (
+              {["Good Health and Well-Being (SDG 3)", "Industry, Innovation and Infrastructure (SDG 9)", "Partnerships for the Goals (SDG 17)", "Decent Work and Economic Growth (SDG 8)"].map((s) => (
                 <span key={s} className="text-[11px] px-3 py-1 rounded-full border border-white/20 bg-white/10 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
               ))}
             </div>
