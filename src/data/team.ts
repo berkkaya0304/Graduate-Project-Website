@@ -15,7 +15,7 @@ export const teamMembers: Member[] = [
       "DevOps and deployment",
     ],
     skills: ["Node.js", "Next.js", "PostgreSQL", "Docker", "CI/CD"],
-    bio: "Responsible for team coordination and technical architecture. Focuses on performance and security issues.",
+    bio: "Proje yöneticisi ve full-stack geliştirici olarak takım koordinasyonu ve teknik mimari tasarımından sorumlu. Performans ve güvenlik konularında uzmanlaşmış. Aflatoxin analiz sisteminin backend altyapısını ve deployment süreçlerini yönetiyor.",
   },
   {
     name: "Onur Turan",
@@ -24,7 +24,7 @@ export const teamMembers: Member[] = [
     email: "onur@example.com",
     responsibilities: ["Interface development", "State management", "Accessibility"],
     skills: ["React", "TypeScript", "Tailwind", "Vitest"],
-    bio: "Develops interfaces with a focus on user experience and accessibility.",
+    bio: "Frontend geliştirici olarak kullanıcı arayüzü tasarımı ve geliştirme süreçlerinde uzman. React ve TypeScript teknolojileri ile modern web uygulamaları geliştiriyor. Erişilebilirlik ve kullanıcı deneyimi odaklı çalışmalar yürütüyor.",
   },
   {
     name: "Alperen Aktaş",
@@ -33,7 +33,7 @@ export const teamMembers: Member[] = [
     email: "alperen@example.com",
     responsibilities: ["UV fluorescence analysis", "Image preprocessing", "Model training"],
     skills: ["OpenCV", "PyTorch", "NumPy", "Scikit-image", "UV Imaging"],
-    bio: "Works on aflatoxin fluorescence detection under UV light.",
+    bio: "Görüntü işleme ve bilgisayarlı görü uzmanı. UV ışık altında aflatoxin floresans tespiti konusunda çalışmalar yürütüyor. OpenCV ve PyTorch kullanarak makine öğrenmesi modelleri geliştiriyor. Görüntü ön işleme ve analiz algoritmaları tasarlıyor.",
   },
   {
     name: "İrem Ayça Uçankale",
@@ -42,7 +42,7 @@ export const teamMembers: Member[] = [
     email: "irem@example.com",
     responsibilities: ["Data analysis", "Model validation", "Statistical evaluation"],
     skills: ["Pandas", "Scikit-learn", "Matplotlib", "Statistics"],
-    bio: "Analyzes the correlation between aflatoxin contamination and visual characteristics.",
+    bio: "Veri bilimi ve istatistiksel analiz uzmanı. Aflatoxin kontaminasyonu ile görsel özellikler arasındaki korelasyonu analiz ediyor. Pandas ve Scikit-learn kullanarak veri analizi ve model doğrulama süreçlerini yürütüyor. İstatistiksel değerlendirme ve raporlama konularında uzman.",
   },
   {
     name: "İlhan Ün",
@@ -51,7 +51,7 @@ export const teamMembers: Member[] = [
     email: "ilhan@example.com",
     responsibilities: ["Mobile integration", "Test automation", "Quality control"],
     skills: ["Flutter", "Playwright", "Cypress", "Mobile Testing"],
-    bio: "Manages test automation and quality processes. Conducts mobile application integrations.",
+    bio: "Mobil uygulama geliştirme ve kalite güvencesi uzmanı. Flutter ile mobil uygulama entegrasyonları yapıyor. Test otomasyonu ve kalite kontrol süreçlerini yönetiyor. Playwright ve Cypress kullanarak end-to-end testler geliştiriyor.",
   },
 ];
 
@@ -63,7 +63,7 @@ export const advisor: Member = {
   email: "emin.kugu@university.edu",
   responsibilities: ["Project advisory", "Technical guidance", "Academic evaluation"],
   skills: ["Academic Supervision", "Research Methodology", "Project Management"],
-  bio: "Provides technical guidance as project advisor and sets academic standards.",
+  bio: "Proje danışmanı olarak teknik rehberlik sağlıyor ve akademik standartları belirliyor. Araştırma metodolojisi ve proje yönetimi konularında uzman. Takımın akademik gelişimini destekliyor ve proje kalitesini değerlendiriyor.",
 };
 
 // Jury members
@@ -75,7 +75,7 @@ export const juryMembers: Member[] = [
     email: "tolga.capin@university.edu",
     responsibilities: ["Project evaluation", "Jury membership", "Technical review"],
     skills: ["Project Evaluation", "Technical Review", "Academic Assessment"],
-    bio: "Participates in project evaluation and technical review processes as a jury member.",
+    bio: "Jüri üyesi olarak proje değerlendirme ve teknik inceleme süreçlerinde yer alıyor. Akademik değerlendirme ve teknik gözden geçirme konularında uzman. Proje kalitesini ve akademik standartları değerlendiriyor.",
   },
   {
     name: "Ayşe Yasemin Seydim",
@@ -84,7 +84,7 @@ export const juryMembers: Member[] = [
     email: "ayse.seydim@university.edu",
     responsibilities: ["Project evaluation", "Jury membership", "Academic evaluation"],
     skills: ["Project Evaluation", "Academic Assessment", "Research Review"],
-    bio: "Takes part in project evaluation and setting academic standards as a jury member.",
+    bio: "Jüri üyesi olarak proje değerlendirme ve akademik standartları belirleme süreçlerinde görev alıyor. Araştırma gözden geçirme ve akademik değerlendirme konularında uzman. Proje kalitesini ve akademik başarıyı değerlendiriyor.",
   },
 ];
 
