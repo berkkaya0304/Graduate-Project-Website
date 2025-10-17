@@ -28,7 +28,7 @@ export default function TeamClient({
   juryMembers?: Member[]; 
 }) {
   const [query, setQuery] = useState("");
-  const [roleFilter, setRoleFilter] = useState("Hepsi");
+  const [roleFilter, setRoleFilter] = useState("All");
   const [sortBy, setSortBy] = useState<"name" | "role">("name");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [selected, setSelected] = useState<Member | null>(null);
@@ -36,7 +36,7 @@ export default function TeamClient({
   const roles = useMemo(() => {
     const set = new Set<string>();
     for (const m of members) set.add(m.role);
-    return ["Hepsi", ...Array.from(set)];
+    return ["All", ...Array.from(set)];
   }, [members]);
 
   const filteredMembers = useMemo(() => {
@@ -48,12 +48,12 @@ export default function TeamClient({
         m.role.toLowerCase().includes(q) ||
         (m.email ? m.email.toLowerCase().includes(q) : false) ||
         (m.skills ? m.skills.join(" ").toLowerCase().includes(q) : false);
-      const matchesRole = roleFilter === "Hepsi" || m.role === roleFilter;
+      const matchesRole = roleFilter === "All" || m.role === roleFilter;
       return matchesQuery && matchesRole;
     });
     const sorted = [...base].sort((a, b) => {
-      if (sortBy === "name") return a.name.localeCompare(b.name, "tr");
-      return a.role.localeCompare(b.role, "tr");
+      if (sortBy === "name") return a.name.localeCompare(b.name, "en");
+      return a.role.localeCompare(b.role, "en");
     });
     return sorted;
   }, [members, query, roleFilter, sortBy]);
@@ -63,21 +63,21 @@ export default function TeamClient({
       <header className="card p-6">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold">Takım Üyeleri</h1>
+            <h1 className="text-2xl font-semibold">Team Members</h1>
             <p className="mt-2 opacity-90">
-              Ekip üyeleri, roller ve ana sorumluluklar. Toplam {filteredMembers.length} üye listeleniyor.
+              Team members, roles and main responsibilities. Total {filteredMembers.length} members listed.
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <label className="sr-only" htmlFor="search">Ara</label>
+            <label className="sr-only" htmlFor="search">Search</label>
             <input
               id="search"
-              placeholder="İsim, rol veya e-posta ara"
+              placeholder="Search by name, role or email"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="bg-[var(--color-card)] border border-[var(--color-border)] rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-primary-600)]"
             />
-            <label className="sr-only" htmlFor="role">Rol</label>
+            <label className="sr-only" htmlFor="role">Role</label>
             <select
               id="role"
               value={roleFilter}
@@ -88,15 +88,15 @@ export default function TeamClient({
                 <option key={r} value={r}>{r}</option>
               ))}
             </select>
-            <label className="sr-only" htmlFor="sort">Sırala</label>
+            <label className="sr-only" htmlFor="sort">Sort</label>
             <select
               id="sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as "name" | "role")}
               className="bg-[var(--color-card)] border border-[var(--color-border)] rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-primary-600)]"
             >
-              <option value="name">İsme göre</option>
-              <option value="role">Role göre</option>
+              <option value="name">By name</option>
+              <option value="role">By role</option>
             </select>
             <div className="inline-flex rounded-md border border-[var(--color-border)] overflow-hidden">
               <button
@@ -104,18 +104,18 @@ export default function TeamClient({
                 onClick={() => setView("grid")}
                 className={`px-3 py-2 text-sm ${view === "grid" ? "bg-[var(--color-primary-600)] text-white" : "bg-[var(--color-card)]"}`}
                 aria-pressed={view === "grid"}
-                aria-label="Izgara görünüm"
+                aria-label="Grid view"
               >
-                Izgara
+                Grid
               </button>
               <button
                 type="button"
                 onClick={() => setView("list")}
                 className={`px-3 py-2 text-sm ${view === "list" ? "bg-[var(--color-primary-600)] text-white" : "bg-[var(--color-card)]"}`}
                 aria-pressed={view === "list"}
-                aria-label="Liste görünüm"
+                aria-label="List view"
               >
-                Liste
+                List
               </button>
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function TeamClient({
 
       {/* Main Team Members */}
       <section className="card p-6">
-        <h2 className="text-xl font-semibold mb-4">Takım Üyeleri ({filteredMembers.length})</h2>
+        <h2 className="text-xl font-semibold mb-4">Team Members ({filteredMembers.length})</h2>
         <div className={view === "grid" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid gap-3"}>
           {filteredMembers.map((m) => (
             <article key={m.name} className="card p-5">
@@ -160,9 +160,9 @@ export default function TeamClient({
                             type="button"
                             onClick={() => navigator.clipboard?.writeText(m.email || "")}
                             className="text-xs opacity-80 hover:opacity-100 border border-[var(--color-border)] rounded px-2 py-0.5"
-                            aria-label="E-postayı kopyala"
+                            aria-label="Copy email"
                           >
-                            Kopyala
+                            Copy
                           </button>
                         </div>
                       ) : null}
@@ -176,16 +176,16 @@ export default function TeamClient({
                         aria-expanded={selected?.name === m.name}
                         aria-controls={`member-${m.name.replace(/\s+/g, "-")}-dialog`}
                       >
-                        Detay
+                        Details
                       </button>
                       <a
                         className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
                         href={`/team/${slugify(m.name)}`}
                         target="_blank"
                         rel="noreferrer"
-                        aria-label="Yeni pencerede aç"
+                        aria-label="Open in new window"
                       >
-                        Aç
+                        Open
                       </a>
                     </div>
                   </div>
@@ -215,7 +215,7 @@ export default function TeamClient({
       {/* Advisor */}
       {advisor && (
         <section className="card p-6">
-          <h2 className="text-xl font-semibold mb-4">Danışman</h2>
+          <h2 className="text-xl font-semibold mb-4">Advisor</h2>
           <div className="card p-5">
             <div className="flex items-start gap-3">
               {advisor.avatarUrl ? (
@@ -257,16 +257,16 @@ export default function TeamClient({
                       aria-expanded={selected?.name === advisor.name}
                       aria-controls={`member-${advisor.name.replace(/\s+/g, "-")}-dialog`}
                     >
-                      Detay
+                      Details
                     </button>
                     <a
                       className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
                       href={`/team/${slugify(advisor.name)}`}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label="Yeni pencerede aç"
+                      aria-label="Open in new window"
                     >
-                      Aç
+                      Open
                     </a>
                   </div>
                 </div>
@@ -295,7 +295,7 @@ export default function TeamClient({
       {/* Jury Members */}
       {juryMembers && juryMembers.length > 0 && (
         <section className="card p-6">
-          <h2 className="text-xl font-semibold mb-4">Jüri Üyeleri ({juryMembers.length})</h2>
+          <h2 className="text-xl font-semibold mb-4">Jury Members ({juryMembers.length})</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {juryMembers.map((m) => (
               <article key={m.name} className="card p-5">
@@ -339,16 +339,16 @@ export default function TeamClient({
                           aria-expanded={selected?.name === m.name}
                           aria-controls={`member-${m.name.replace(/\s+/g, "-")}-dialog`}
                         >
-                          Detay
+                          Details
                         </button>
                         <a
                           className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
                           href={`/team/${slugify(m.name)}`}
                           target="_blank"
                           rel="noreferrer"
-                          aria-label="Yeni pencerede aç"
+                          aria-label="Open in new window"
                         >
-                          Aç
+                          Open
                         </a>
                       </div>
                     </div>
@@ -404,9 +404,9 @@ export default function TeamClient({
                 type="button"
                 className="ms-auto text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
                 onClick={() => setSelected(null)}
-                aria-label="Kapat"
+                aria-label="Close"
               >
-                Kapat
+                Close
               </button>
             </div>
             {selected.bio ? (
@@ -434,7 +434,7 @@ export default function TeamClient({
                 target="_blank"
                 rel="noreferrer"
               >
-                Yeni pencerede aç
+                Open in new window
               </a>
             </div>
             <ul className="list-disc ms-5 mt-4 text-sm opacity-90 space-y-1">

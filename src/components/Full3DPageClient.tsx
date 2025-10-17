@@ -119,7 +119,7 @@ export default function Full3DPageClient() {
             
             {/* Main Team Members Section */}
             <div className="mt-6">
-              <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👥 Takım Üyeleri</h3>
+              <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👥 Team Members</h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {teamMembers.map((m) => (
                   <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
@@ -149,7 +149,7 @@ export default function Full3DPageClient() {
             {/* Advisor Section */}
             {advisor && (
               <div className="mt-6">
-                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👨‍🏫 Danışman</h3>
+                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👨‍🏫 Advisor</h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   <div className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">
                     {advisor.avatarUrl ? (
@@ -178,7 +178,7 @@ export default function Full3DPageClient() {
             {/* Jury Members Section */}
             {juryMembers && juryMembers.length > 0 && (
               <div className="mt-6">
-                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>⚖️ Jüri Üyeleri</h3>
+                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>⚖️ Jury Members</h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {juryMembers.map((m) => (
                     <div key={m.name} className="p-4 rounded-lg border border-white/15 bg-[color:rgb(0,0,0)/0.25] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(0,0,0)/0.35]">

@@ -138,7 +138,7 @@ export default function Team3D() {
                     className="text-xs border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
                     onClick={() => setSelected(null)}
                   >
-                    Kapat
+                    Close
                   </button>
                 </div>
                 {member.bio ? <p className="mt-2 text-sm opacity-90">{member.bio}</p> : null}
