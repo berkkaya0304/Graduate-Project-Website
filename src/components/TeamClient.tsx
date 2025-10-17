@@ -14,7 +14,19 @@ export type Member = {
   bio?: string;
 };
 
-export default function TeamClient({ members }: { members: Member[] }) {
+function slugify(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9ığüşöç\s-]/g, "").replace(/\s+/g, "-");
+}
+
+export default function TeamClient({ 
+  members, 
+  advisor, 
+  juryMembers 
+}: { 
+  members: Member[]; 
+  advisor?: Member; 
+  juryMembers?: Member[]; 
+}) {
   const [query, setQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("Hepsi");
   const [sortBy, setSortBy] = useState<"name" | "role">("name");
@@ -110,14 +122,106 @@ export default function TeamClient({ members }: { members: Member[] }) {
         </div>
       </header>
 
-      <section className={view === "grid" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid gap-3"}>
-        {filteredMembers.map((m) => (
-          <article key={m.name} className="card p-5">
-            <div className={view === "grid" ? "flex items-start gap-3" : "flex items-start gap-3"}>
-              {m.avatarUrl ? (
+      {/* Main Team Members */}
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold mb-4">Takım Üyeleri ({filteredMembers.length})</h2>
+        <div className={view === "grid" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid gap-3"}>
+          {filteredMembers.map((m) => (
+            <article key={m.name} className="card p-5">
+              <div className={view === "grid" ? "flex items-start gap-3" : "flex items-start gap-3"}>
+                {m.avatarUrl ? (
+                  <Image
+                    alt={m.name}
+                    src={m.avatarUrl}
+                    width={48}
+                    height={48}
+                    className="size-12 rounded-full bg-[var(--muted)] object-contain p-1"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="size-12 rounded-full bg-[var(--muted)] grid place-items-center text-sm opacity-80">
+                    {m.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
+                  </div>
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h3 className="font-medium truncate">{m.name}</h3>
+                      <p className="opacity-80 text-sm truncate">{m.role}</p>
+                      {m.email ? (
+                        <div className="mt-1 flex items-center gap-2">
+                          <a
+                            className="text-[var(--color-primary-600)] text-sm truncate hover:underline"
+                            href={`mailto:${m.email}`}
+                          >
+                            {m.email}
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => navigator.clipboard?.writeText(m.email || "")}
+                            className="text-xs opacity-80 hover:opacity-100 border border-[var(--color-border)] rounded px-2 py-0.5"
+                            aria-label="E-postayı kopyala"
+                          >
+                            Kopyala
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                        onClick={() => setSelected(m)}
+                        aria-haspopup="dialog"
+                        aria-expanded={selected?.name === m.name}
+                        aria-controls={`member-${m.name.replace(/\s+/g, "-")}-dialog`}
+                      >
+                        Detay
+                      </button>
+                      <a
+                        className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                        href={`/team/${slugify(m.name)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Yeni pencerede aç"
+                      >
+                        Aç
+                      </a>
+                    </div>
+                  </div>
+
+                  {m.skills && m.skills.length > 0 ? (
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {m.skills.map((s) => (
+                        <span key={s} className="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] bg-[color:var(--muted)/0.6]">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <ul className="list-disc ms-5 mt-3 text-sm opacity-90 space-y-1">
+                    {m.responsibilities.map((r) => (
+                      <li key={r}>{r}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Advisor */}
+      {advisor && (
+        <section className="card p-6">
+          <h2 className="text-xl font-semibold mb-4">Danışman</h2>
+          <div className="card p-5">
+            <div className="flex items-start gap-3">
+              {advisor.avatarUrl ? (
                 <Image
-                  alt={m.name}
-                  src={m.avatarUrl}
+                  alt={advisor.name}
+                  src={advisor.avatarUrl}
                   width={48}
                   height={48}
                   className="size-12 rounded-full bg-[var(--muted)] object-contain p-1"
@@ -125,48 +229,51 @@ export default function TeamClient({ members }: { members: Member[] }) {
                 />
               ) : (
                 <div className="size-12 rounded-full bg-[var(--muted)] grid place-items-center text-sm opacity-80">
-                  {m.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
+                  {advisor.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
                 </div>
               )}
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <h3 className="font-medium truncate">{m.name}</h3>
-                    <p className="opacity-80 text-sm truncate">{m.role}</p>
-                    {m.email ? (
+                    <h3 className="font-medium truncate">{advisor.name}</h3>
+                    <p className="opacity-80 text-sm truncate">{advisor.role}</p>
+                    {advisor.email ? (
                       <div className="mt-1 flex items-center gap-2">
                         <a
                           className="text-[var(--color-primary-600)] text-sm truncate hover:underline"
-                          href={`mailto:${m.email}`}
+                          href={`mailto:${advisor.email}`}
                         >
-                          {m.email}
+                          {advisor.email}
                         </a>
-                        <button
-                          type="button"
-                          onClick={() => navigator.clipboard?.writeText(m.email || "")}
-                          className="text-xs opacity-80 hover:opacity-100 border border-[var(--color-border)] rounded px-2 py-0.5"
-                          aria-label="E-postayı kopyala"
-                        >
-                          Kopyala
-                        </button>
                       </div>
                     ) : null}
                   </div>
-                  <button
-                    type="button"
-                    className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
-                    onClick={() => setSelected(m)}
-                    aria-haspopup="dialog"
-                    aria-expanded={selected?.name === m.name}
-                    aria-controls={`member-${m.name.replace(/\s+/g, "-")}-dialog`}
-                  >
-                    Detay
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                      onClick={() => setSelected(advisor)}
+                      aria-haspopup="dialog"
+                      aria-expanded={selected?.name === advisor.name}
+                      aria-controls={`member-${advisor.name.replace(/\s+/g, "-")}-dialog`}
+                    >
+                      Detay
+                    </button>
+                    <a
+                      className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                      href={`/team/${slugify(advisor.name)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Yeni pencerede aç"
+                    >
+                      Aç
+                    </a>
+                  </div>
                 </div>
 
-                {m.skills && m.skills.length > 0 ? (
+                {advisor.skills && advisor.skills.length > 0 ? (
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {m.skills.map((s) => (
+                    {advisor.skills.map((s) => (
                       <span key={s} className="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] bg-[color:var(--muted)/0.6]">
                         {s}
                       </span>
@@ -175,15 +282,99 @@ export default function TeamClient({ members }: { members: Member[] }) {
                 ) : null}
 
                 <ul className="list-disc ms-5 mt-3 text-sm opacity-90 space-y-1">
-                  {m.responsibilities.map((r) => (
+                  {advisor.responsibilities.map((r) => (
                     <li key={r}>{r}</li>
                   ))}
                 </ul>
               </div>
             </div>
-          </article>
-        ))}
-      </section>
+          </div>
+        </section>
+      )}
+
+      {/* Jury Members */}
+      {juryMembers && juryMembers.length > 0 && (
+        <section className="card p-6">
+          <h2 className="text-xl font-semibold mb-4">Jüri Üyeleri ({juryMembers.length})</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {juryMembers.map((m) => (
+              <article key={m.name} className="card p-5">
+                <div className="flex items-start gap-3">
+                  {m.avatarUrl ? (
+                    <Image
+                      alt={m.name}
+                      src={m.avatarUrl}
+                      width={48}
+                      height={48}
+                      className="size-12 rounded-full bg-[var(--muted)] object-contain p-1"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="size-12 rounded-full bg-[var(--muted)] grid place-items-center text-sm opacity-80">
+                      {m.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <h3 className="font-medium truncate">{m.name}</h3>
+                        <p className="opacity-80 text-sm truncate">{m.role}</p>
+                        {m.email ? (
+                          <div className="mt-1 flex items-center gap-2">
+                            <a
+                              className="text-[var(--color-primary-600)] text-sm truncate hover:underline"
+                              href={`mailto:${m.email}`}
+                            >
+                              {m.email}
+                            </a>
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                          onClick={() => setSelected(m)}
+                          aria-haspopup="dialog"
+                          aria-expanded={selected?.name === m.name}
+                          aria-controls={`member-${m.name.replace(/\s+/g, "-")}-dialog`}
+                        >
+                          Detay
+                        </button>
+                        <a
+                          className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                          href={`/team/${slugify(m.name)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Yeni pencerede aç"
+                        >
+                          Aç
+                        </a>
+                      </div>
+                    </div>
+
+                    {m.skills && m.skills.length > 0 ? (
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {m.skills.map((s) => (
+                          <span key={s} className="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] bg-[color:var(--muted)/0.6]">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <ul className="list-disc ms-5 mt-3 text-sm opacity-90 space-y-1">
+                      {m.responsibilities.map((r) => (
+                        <li key={r}>{r}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       {selected ? (
         <div
@@ -237,6 +428,14 @@ export default function TeamClient({ members }: { members: Member[] }) {
               {selected.linkedin ? (
                 <a className="hover:underline" href={selected.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
               ) : null}
+              <a
+                className="ms-auto text-xs border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                href={`/team/${slugify(selected.name)}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Yeni pencerede aç
+              </a>
             </div>
             <ul className="list-disc ms-5 mt-4 text-sm opacity-90 space-y-1">
               {selected.responsibilities.map((r) => (

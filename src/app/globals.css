@@ -3,11 +3,11 @@
 :root {
   --background: #0a0f1a; /* koyu lacivert/siyah taban */
   --foreground: #e6f0ff; /* açık mavi-beyaz metin */
-  --primary: #1e3a8a;    /* mavi (tailwind blue-800) */
-  --primary-600: #2563eb; /* blue-600 aksan */
+  --primary: #6b7280;    /* gri (tailwind gray-500) */
+  --primary-600: #9ca3af; /* gray-400 aksan */
   --muted: #0b1220;
-  --card: #0f172a;       /* slate-900/blue-very dark */
-  --border: #1f2a44;
+  --card: #1f2937;       /* gray-800 */
+  --border: #374151;
 }
 
 @theme inline {
@@ -38,8 +38,8 @@ body {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(30,58,138,0.18), rgba(12,18,32,0.6));
-  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(31, 42, 68, 0.3);
   border-radius: 12px;
 }
 
@@ -52,6 +52,6 @@ body {
 }
 
 .btn-primary:hover {
-  background: #1d4ed8; /* blue-700 */
+  background: #6b7280; /* gray-500 */
   transform: translateY(-1px);
 }
