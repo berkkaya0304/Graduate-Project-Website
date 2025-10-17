@@ -15,31 +15,31 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bitirme Takımı",
-    template: "%s | Bitirme Takımı",
+    default: "Figion — Dried Fig Analysis",
+    template: "%s | Figion",
   },
-  description: "Ekip bitirme projesi websitesi",
+  description: "Quality control and aflatoxin analysis for dried figs",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    locale: "tr_TR",
+    locale: "en_US",
     url: "/",
-    siteName: "Bitirme Takımı",
-    title: "Bitirme Takımı",
-    description: "Ekip bitirme projesi websitesi",
+    siteName: "Figion",
+    title: "Figion — Dried Fig Analysis",
+    description: "Quality control and aflatoxin analysis for dried figs",
     images: [{ url: "/logo.svg" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bitirme Takımı",
-    description: "Ekip bitirme projesi websitesi",
+    title: "Figion — Dried Fig Analysis",
+    description: "Quality control and aflatoxin analysis for dried figs",
     images: ["/logo.svg"],
   },
   themeColor: "#0a0f1a",
-  applicationName: "Bitirme Takımı",
+  applicationName: "Figion",
 };
 
 export default function RootLayout({
@@ -48,19 +48,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         <header className="border-b border-[var(--border)] bg-[var(--muted)]/70 backdrop-blur supports-[backdrop-filter]:bg-[color:var(--muted)/0.6]">
           <div className="container-page flex items-center justify-between py-4">
             <Link href="/" className="text-lg font-semibold tracking-wide">
-              <span className="text-[var(--foreground)]">Bitirme</span>
-              <span className="ml-1 text-[var(--color-primary-600)]">Takımı</span>
+              <span className="text-[var(--foreground)]">Figion</span>
+              <span className="ml-1 text-[var(--color-primary-600)]">Team</span>
             </Link>
             <nav className="flex items-center gap-6 text-sm">
-              <Link href="/#hero" className="hover:text-[var(--color-primary-600)] transition-colors">Ana Sayfa</Link>
-              <Link href="/#reports" className="hover:text-[var(--color-primary-600)] transition-colors">Raporlar</Link>
-              <Link href="/#team" className="hover:text-[var(--color-primary-600)] transition-colors">Takım</Link>
-              <Link href="/#project" className="hover:text-[var(--color-primary-600)] transition-colors">Proje</Link>
+              <Link href="/#hero" className="hover:text-[var(--color-primary-600)] transition-colors">Home</Link>
+              <Link href="/#reports" className="hover:text-[var(--color-primary-600)] transition-colors">Reports</Link>
+              <Link href="/#team" className="hover:text-[var(--color-primary-600)] transition-colors">Team</Link>
+              <Link href="/#project" className="hover:text-[var(--color-primary-600)] transition-colors">Aflatoxin</Link>
             </nav>
           </div>
         </header>
