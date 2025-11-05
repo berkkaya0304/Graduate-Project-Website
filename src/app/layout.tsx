@@ -50,20 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
-        <header className="border-b border-[var(--border)] bg-[var(--muted)]/70 backdrop-blur supports-[backdrop-filter]:bg-[color:var(--muted)/0.6]">
-          <div className="container-page flex items-center justify-between py-4">
-            <Link href="/" className="text-lg font-semibold tracking-wide">
-              <span className="text-[var(--foreground)]">Figion</span>
-              <span className="ml-1 text-[var(--color-primary-600)]">Team</span>
-            </Link>
-            <nav className="flex items-center gap-6 text-sm">
-              <Link href="/#hero" className="hover:text-[var(--color-primary-600)] transition-colors">Home</Link>
-              <Link href="/#reports" className="hover:text-[var(--color-primary-600)] transition-colors">Reports</Link>
-              <Link href="/#team" className="hover:text-[var(--color-primary-600)] transition-colors">Team</Link>
-              <Link href="/#project" className="hover:text-[var(--color-primary-600)] transition-colors">Aflatoxin</Link>
-            </nav>
-          </div>
-        </header>
+        {/* Header removed */}
         <main className="container-page py-8">
           {children}
         </main>

@@ -34,14 +34,17 @@ function FloatingParticles() {
 }
 
 
-export default function Full3DPageClient() {
+export default function Full3DPageClient({ initialPdfs = [] as { name: string; href: string }[] }: { initialPdfs?: { name: string; href: string }[] }) {
   const [mounted, setMounted] = useState(false);
+  const [pdfs, setPdfs] = useState<{ name: string; href: string }[]>(initialPdfs);
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
   const [selectedAdvisor, setSelectedAdvisor] = useState<typeof advisor | null>(null);
   const [selectedJuryMember, setSelectedJuryMember] = useState<typeof juryMembers[0] | null>(null);
-  const [selectedReportOpen, setSelectedReportOpen] = useState(false);
   const [selectedVisual, setSelectedVisual] = useState<string | null>(null);
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
   useEffect(() => setMounted(true), []);
+
+  // No client fetch in static export; server passes initialPdfs
 
   // Reveal on scroll
   useEffect(() => {
@@ -68,14 +71,6 @@ export default function Full3DPageClient() {
   return (
     <div className="fixed inset-0 m-0 p-0">
       {/* Background with driedfig.png and dark brown overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-motion"
-        style={{
-          backgroundImage: 'url(/driedfig.png)',
-          filter: 'brightness(0.3) sepia(0.3)',
-          willChange: 'transform'
-        }}
-      />
       
       {/* Dark purple overlay */}
       <div className="absolute inset-0 bg-[color:rgb(18,10,30)/0.85]" />
@@ -232,15 +227,29 @@ export default function Full3DPageClient() {
 
           <div className="mx-auto max-w-7xl px-6 py-20 reveal">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-xl border border-white/20 bg-[color:rgb(38,26,66)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(10,8,20,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(38,26,66)/0.8] cursor-pointer" onClick={() => setSelectedReportOpen(true)}>
+              <div className="rounded-xl border border-white/20 bg-[color:rgb(38,26,66)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(10,8,20,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(38,26,66)/0.8]">
                 <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 2px 8px rgba(0,0,0,0.5)"}}>Analysis Reports</h2>
                 <p className="mt-2 text-white/90 text-sm" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>Aflatoxin analysis and quality control reports.</p>
-                <ul className="mt-3 text-white/90 text-sm list-disc ms-5 space-y-1">
-                  <li>Aflatoxin Analysis Results</li>
-                  <li>Quality Control Report</li>
-                  <li>Spectroscopic Analysis Data</li>
-                  <li>Food Safety Assessment</li>
-                </ul>
+                {pdfs.length > 0 ? (
+                  <>
+                    <div className="mt-4 space-y-2">
+                      {pdfs.map((f) => (
+                        <div key={f.href} className="flex items-center justify-between gap-3 border border-white/15 rounded px-3 py-2">
+                          <button type="button" className="min-w-0 text-left text-white/90 text-sm truncate hover:underline" onClick={() => setSelectedPdf(f.href)}>
+                            {f.name}
+                          </button>
+                          <div className="flex items-center gap-2">
+                            <button type="button" className="text-xs border border-white/20 rounded px-2 py-1 hover:border-white/40" onClick={() => setSelectedPdf(f.href)}>View</button>
+                            <a className="text-xs border border-white/20 rounded px-2 py-1 hover:border-white/40" href={f.href} download>Download</a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                  </>
+                ) : (
+                  <p className="mt-3 text-white/80 text-sm">No PDFs found. Add files under <code className="font-mono">public/pdfs</code></p>
+                )}
                 <p className="mt-2 text-white/70 text-xs">Folder: <code className="font-mono">public/pdfs</code></p>
               </div>
               <div className="rounded-xl border border-white/20 bg-[color:rgb(38,26,66)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(10,8,20,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(38,26,66)/0.8]">
@@ -257,6 +266,7 @@ export default function Full3DPageClient() {
                 </ul>
                 <p className="mt-2 text-white/70 text-xs">Folder: <code className="font-mono">public/photos</code></p>
               </div>
+          
             </div>
           </div>
 
@@ -507,36 +517,7 @@ export default function Full3DPageClient() {
         </div>
       )}
 
-      {/* Reports Popup Modal */}
-      {selectedReportOpen && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center p-4" onClick={() => setSelectedReportOpen(false)}>
-          <div className="absolute inset-0 bg-black/80" />
-          <div className="relative max-w-lg w-full rounded-xl border border-white/20 bg-[color:rgb(45,28,16)/0.9] backdrop-blur-md p-6 shadow-[0_15px_50px_rgba(20,12,8,0.8)]" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-start gap-3">
-              <h2 className="text-white text-xl font-semibold">Analysis Reports</h2>
-              <button type="button" className="ms-auto text-white/80 hover:text-white text-sm border border-white/20 rounded px-3 py-1" onClick={() => setSelectedReportOpen(false)}>✕</button>
-            </div>
-            <p className="mt-2 text-white/90 text-sm">Detailed aflatoxin analysis and quality control documentation.</p>
-            <ul className="mt-3 text-white/90 text-sm list-disc ms-5 space-y-1">
-              <li>Aflatoxin Analysis Results (PDF)</li>
-              <li>Quality Control Report (PDF)</li>
-              <li>Spectroscopic Analysis Data (CSV)</li>
-              <li>Food Safety Assessment (PDF)</li>
-            </ul>
-            <p className="mt-3 text-white/80 text-xs">Files under <code className="font-mono">public/pdfs</code></p>
-            <div className="mt-4 flex flex-col gap-2">
-              <a
-                className="inline-flex items-center gap-2 text-sm border border-white/20 rounded px-3 py-2 text-white/90 hover:text-white hover:border-white/40 transition-colors"
-                href="/pdfs/CMPE%20491%20%E2%80%93%20Senior%20Design%20Project%20I.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>Project Proposal (PDF)</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
+      
 
       {/* Visual Image Popup Modal */}
       {selectedVisual && (
@@ -549,6 +530,29 @@ export default function Full3DPageClient() {
             </div>
             <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/15">
               <Image alt="Visual sample" src={selectedVisual} fill className="object-cover" unoptimized />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PDF Preview Modal */}
+      {selectedPdf && (
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center p-4" onClick={() => setSelectedPdf(null)}>
+          <div className="absolute inset-0 bg-black/80" />
+          <div className="relative max-w-5xl w-full rounded-xl border border-white/20 bg-[color:rgb(34,22,54)/0.95] backdrop-blur-md p-4 shadow-[0_15px_50px_rgba(10,8,20,0.8)]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-3 mb-3">
+              <h2 className="text-white text-lg font-semibold truncate">{decodeURIComponent(selectedPdf.replace('/pdfs/', ''))}</h2>
+              <a className="text-white/80 hover:text-white text-sm border border-white/20 rounded px-3 py-1" href={selectedPdf} target="_blank" rel="noreferrer">Open</a>
+              <a className="text-white/80 hover:text-white text-sm border border-white/20 rounded px-3 py-1" href={selectedPdf} download>Download</a>
+              <button type="button" className="ms-auto text-white/80 hover:text-white text-sm border border-white/20 rounded px-3 py-1" onClick={() => setSelectedPdf(null)}>✕</button>
+            </div>
+            <div className="relative w-full" style={{ height: '80vh' }}>
+              <object data={selectedPdf} type="application/pdf" className="w-full h-full rounded-lg overflow-hidden border border-white/15">
+                <embed src={selectedPdf} type="application/pdf" className="w-full h-full" />
+                <div className="p-4 text-white/80 text-sm">
+                  Couldn't render the PDF inline. Please use Open or Download.
+                </div>
+              </object>
             </div>
           </div>
         </div>
@@ -568,9 +572,9 @@ export default function Full3DPageClient() {
         /* Background gentle pan/zoom */
         .bg-motion { animation: bgZoomPan 40s ease-in-out infinite alternate; transform-origin: center; }
         @keyframes bgZoomPan {
-          0% { transform: scale(1) translate3d(0,0,0); }
-          50% { transform: scale(1.05) translate3d(1.5%, -1.5%, 0); }
-          100% { transform: scale(1.1) translate3d(-1.5%, 1.5%, 0); }
+          0% { transform: scale(0.92) translate3d(0,0,0); }
+          50% { transform: scale(0.95) translate3d(1.5%, -1.5%, 0); }
+          100% { transform: scale(0.98) translate3d(-1.5%, 1.5%, 0); }
         }
         /* Reveal on scroll */
         .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }

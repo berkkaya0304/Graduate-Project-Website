@@ -6,7 +6,7 @@ export const teamMembers: Member[] = [
     name: "Berk Kaya",
     role: "",
     email: "berk.kaya@tedu.edu.tr",
-    avatarUrl: "",
+    avatarUrl: "/members/1.jpg",
     github: "https://github.com/berkkaya0304",
     linkedin: "https://www.linkedin.com/in/berkkaya",
     responsibilities: [
@@ -20,7 +20,7 @@ export const teamMembers: Member[] = [
   {
     name: "Onur Turan",
     role: "",
-    avatarUrl: "",
+    avatarUrl: "/members/2.jpg",
     email: "onur.turan@tedu.edu.tr",
     responsibilities: [""],
     skills: [""],
@@ -29,7 +29,7 @@ export const teamMembers: Member[] = [
   {
     name: "Alperen Aktaş",
     role: "",
-    avatarUrl: "",
+    avatarUrl: "/members/5.jpg",
     email: "alperen.aktas@tedu.edu.tr",
     responsibilities: [""],
     skills: [""],
@@ -38,7 +38,7 @@ export const teamMembers: Member[] = [
   {
     name: "İrem Ayça Uçankale",
     role: "",
-    avatarUrl: "",
+    avatarUrl: "/members/4.jpg",
     email: "irem.ucankale@tedu.edu.tr",
     responsibilities: [""],
     skills: [""],
@@ -47,7 +47,7 @@ export const teamMembers: Member[] = [
   {
     name: "İlhan Ün",
     role: "",
-    avatarUrl: "",
+    avatarUrl: "/members/3.jpg",
     email: "ilhan.un@tedu.edu.tr",
     responsibilities: [""],
     skills: [""],
@@ -59,7 +59,7 @@ export const teamMembers: Member[] = [
 export const advisor: Member = {
   name: "Emin Kuğu",
   role: "Advisor",
-  avatarUrl: "",
+  avatarUrl: "/members/6.jpg",
   email: "emin.kugu@tedu.edu.tr",
   responsibilities: ["Project advisory", "Technical guidance", "Academic evaluation"],
   skills: ["Academic Supervision"],
@@ -71,7 +71,7 @@ export const juryMembers: Member[] = [
   {
     name: "Tolga Kurtuluş Çapın",
     role: "Jury Member",
-    avatarUrl: "",
+    avatarUrl: "/members/7.webp",
     email: "tolga.capin@tedu.edu.tr",
     responsibilities: ["Project evaluation", "Jury membership", "Technical review"],
     skills: ["Project Evaluation", "Technical Review", "Academic Assessment"],
@@ -80,7 +80,7 @@ export const juryMembers: Member[] = [
   {
     name: "Ayşe Yasemin Seydim",
     role: "Jury Member",
-    avatarUrl: "",
+    avatarUrl: "/members/8.jpeg",
     email: "yasemin.seydim@tedu.edu.tr",
     responsibilities: ["Project evaluation", "Jury membership", "Academic evaluation"],
     skills: ["Project Evaluation", "Academic Assessment", "Research Review"],
