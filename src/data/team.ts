@@ -10,9 +10,6 @@ export const teamMembers: Member[] = [
     github: "https://github.com/berkkaya0304",
     linkedin: "https://www.linkedin.com/in/berkkaya",
     responsibilities: [
-      "Sprint planning and coordination",
-      "Back-end API design",
-      "DevOps and deployment",
     ],
     skills: [""],
     bio: "",
@@ -41,7 +38,7 @@ export const teamMembers: Member[] = [
     avatarUrl: "/members/4.jpg",
     email: "irem.ucankale@tedu.edu.tr",
     responsibilities: [""],
-    skills: [""],
+    skills: ["Backend Development", "Database Management", "Frontend Development"],
     bio: "",
   },
   {
@@ -50,7 +47,7 @@ export const teamMembers: Member[] = [
     avatarUrl: "/members/3.jpg",
     email: "ilhan.un@tedu.edu.tr",
     responsibilities: [""],
-    skills: [""],
+    skills: ["Data Management"],
     bio: "",
   },
 ];

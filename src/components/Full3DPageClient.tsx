@@ -95,13 +95,13 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
           <div className="mx-auto max-w-6xl px-6 py-20 reveal">
             <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
             <h2 className="text-white text-3xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>About the Project</h2>
-            <p className="mt-2 text-white/95 text-base" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>We detect aflatoxin-contaminated dried figs through image analysis techniques. Our system classifies figs based on visual characteristics under specific lighting conditions — particularly UV light, where aflatoxin contamination typically causes yellowish fluorescence.</p>
+            <p className="mt-2 text-white/95 text-base" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Aflatoxins are highly toxic and carcinogenic compounds produced by Aspergillus mold species, posing a serious risk to food safety. Their formation in foodstuffs is primarily driven by inadequate environmental conditions, such as high humidity and inappropriate storage temperatures. While high-precision laboratory analyses are used for segregation, this technique creates significant operational constraints in large-scale commercial settings due to its high cost and time-consuming nature. This project aims for the rapid, low-cost, and automatic detection of aflatoxin-contaminated dried figs through image analysis under UV light. The yellowish fluorescence exhibited by contaminated areas under UV light forms the basis of this method. With the aid of a prepared dataset, accurate classification of healthy and aflatoxin-contaminated figs will be ensured, accelerating pre-laboratory screening and reducing operational costs.</p>
             <div className="mt-4 grid sm:grid-cols-2 gap-4">
               {[
-                { name: "Aflatoxin Analysis", desc: "Mycotoxin detection and quantification" },
-                { name: "Quality Control", desc: "Food safety standards and compliance" },
-                { name: "Machine Learning", desc: "Automated classification and scoring" },
-                { name: "Visual Analysis", desc: "Image processing and pattern recognition" },
+                { name: "UV Imaging", desc: "Yellowish fluorescence detection under UV light" },
+                { name: "Dataset & Classification", desc: "Healthy vs. contaminated fig labeling and modeling" },
+                { name: "Rapid Screening", desc: "Pre-lab triage to save time and cost" },
+                { name: "Automation", desc: "Low-cost, scalable, and automatic analysis pipeline" },
               ].map((t) => (
                 <div key={t.name} className="p-5 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7]">
                   <div className="text-white font-medium text-lg" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>{t.name}</div>
@@ -110,9 +110,9 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
               ))}
             </div>
             <ul className="mt-4 text-white/95 list-disc ms-5 space-y-1 text-base" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>
-              <li>Goal: Objective evaluation of dried fig quality</li>
-              <li>Method: Spectroscopic analysis and computer vision</li>
-              <li>Impact: Stronger food safety and export quality</li>
+              <li>Goal: Rapid, low-cost, automatic detection of contaminated dried figs</li>
+              <li>Method: UV-light imaging and computer vision to detect fluorescence</li>
+              <li>Impact: Accelerated pre-lab screening and reduced operational costs</li>
             </ul>
             </div>
           </div>
@@ -250,21 +250,27 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
                 ) : (
                   <p className="mt-3 text-white/80 text-sm">No PDFs found. Add files under <code className="font-mono">public/pdfs</code></p>
                 )}
-                <p className="mt-2 text-white/70 text-xs">Folder: <code className="font-mono">public/pdfs</code></p>
               </div>
               <div className="rounded-xl border border-white/20 bg-[color:rgb(38,26,66)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(10,8,20,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(38,26,66)/0.8]">
                 <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 2px 8px rgba(0,0,0,0.5)"}}>Visual Analysis</h2>
                 <p className="mt-2 text-white/90 text-sm" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>Pipeline: UV fluorescence detection → background removal → defect detection → color-space metrics → aflatoxin risk classification.</p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
-                  {["/photos/fig-sample1.jpg","/photos/fig-sample2.jpg","/photos/fig-sample3.jpg"].map((src) => (
-                    <div key={src} className="aspect-[4/3] rounded bg-white/10/10 border border-white/10 grid place-items-center text-[10px] text-white/80 cursor-pointer hover:bg-white/15" onClick={() => setSelectedVisual(src)}>Fig Sample</div>
+                  {["/figs/1.jpeg","/figs/2.png","/figs/3.png"].map((src) => (
+                    <button
+                      type="button"
+                      key={src}
+                      className="relative aspect-[4/3] rounded overflow-hidden border border-white/10 group"
+                      onClick={() => setSelectedVisual(src)}
+                      aria-label="Open fig image"
+                    >
+                      <Image alt="Fig sample" src={src} fill className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" unoptimized />
+                    </button>
                   ))}
                 </div>
                 <ul className="mt-3 text-white/80 text-xs list-disc ms-5 space-y-1">
                   <li>Batch processing with reproducible parameters</li>
                   <li>Export JSON metrics + overlay images</li>
                 </ul>
-                <p className="mt-2 text-white/70 text-xs">Folder: <code className="font-mono">public/photos</code></p>
               </div>
           
             </div>
