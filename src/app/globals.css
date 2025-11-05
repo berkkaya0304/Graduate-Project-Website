@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1a0f0a; /* koyu kahverengi taban */
-  --foreground: #f5e6d3; /* açık kahverengi-beyaz metin */
-  --primary: #8b4513;    /* koyu kahverengi (saddle brown) */
-  --primary-600: #a0522d; /* sienna aksan */
-  --muted: #2d1b0f;
-  --card: #3d2817;       /* koyu kahverengi kart */
-  --border: #5d3a1a;
+  --background: #0f0a1a; /* koyu mor taban */
+  --foreground: #f4f0ff; /* açık mor-beyaz metin */
+  --primary: #7c3aed;    /* mor (violet-600) */
+  --primary-600: #6d28d9; /* mor (violet-700) */
+  --muted: #1a1030;
+  --card: #1f1538;       /* koyu mor kart */
+  --border: #3a2a6a;
 }
 
 @theme inline {
@@ -52,6 +52,6 @@ body {
 }
 
 .btn-primary:hover {
-  background: #8b4513; /* saddle brown */
+  background: #7c3aed; /* violet */
   transform: translateY(-1px);
 }

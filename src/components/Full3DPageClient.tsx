@@ -17,7 +17,7 @@ function FloatingParticles() {
         return (
           <span
             key={i}
-            className="absolute rounded-full bg-amber-200/60 shadow-[0_0_12px_rgba(139,69,19,0.4)] particle"
+            className="absolute rounded-full bg-violet-200/60 shadow-[0_0_12px_rgba(124,58,237,0.4)] particle"
             style={{
               left: `${left}%`,
               width: size,
@@ -77,19 +77,19 @@ export default function Full3DPageClient() {
         }}
       />
       
-      {/* Dark brown overlay */}
-      <div className="absolute inset-0 bg-[color:rgb(30,20,10)/0.85]" />
+      {/* Dark purple overlay */}
+      <div className="absolute inset-0 bg-[color:rgb(18,10,30)/0.85]" />
       <FloatingParticles />
       
       {/* Content */}
       <div className="relative z-10 h-screen overflow-y-auto">
         <div className="min-h-screen">
           <div className="mx-auto max-w-6xl px-6 text-center py-20 reveal">
-            <div className="mx-auto inline-block rounded-xl border border-amber-200/30 bg-[color:rgb(40,25,15)/0.8] backdrop-blur-md px-6 py-6 shadow-[0_15px_50px_rgba(25,15,8,0.9)] transition-transform duration-500">
+            <div className="mx-auto inline-block rounded-xl border border-violet-200/30 bg-[color:rgb(26,18,40)/0.8] backdrop-blur-md px-6 py-6 shadow-[0_15px_50px_rgba(12,8,20,0.9)] transition-transform duration-500">
               <div className="mb-6 flex items-center justify-center">
                 <div className="relative">
-                  <Image alt="Figion Logo" src="/logo.jpg" width={120} height={120} className="rounded-full border-2 border-white/30 shadow-[0_12px_48px_rgba(0,0,0,0.6)] object-cover ring-2 ring-white/10" unoptimized />
-                  <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-400/25 to-orange-500/25 blur-md"></div>
+                  <Image alt="Figion Logo" src="/logo.jpeg" width={120} height={120} className="rounded-full border-2 border-white/30 shadow-[0_12px_48px_rgba(0,0,0,0.6)] object-cover ring-2 ring-white/10" unoptimized />
+                  <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-violet-400/25 to-fuchsia-500/25 blur-md"></div>
                 </div>
               </div>
               <h1 className="text-white text-4xl sm:text-6xl font-bold tracking-tight" style={{textShadow:"0 3px 12px rgba(0,0,0,0.8)"}}>Figion — Dried Fig Aflatoxin Analysis</h1>
@@ -98,7 +98,7 @@ export default function Full3DPageClient() {
           </div>
 
           <div className="mx-auto max-w-6xl px-6 py-20 reveal">
-            <div className="rounded-xl border border-amber-200/25 bg-[color:rgb(35,22,12)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(25,15,8,0.8)]">
+            <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
             <h2 className="text-white text-3xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>About the Project</h2>
             <p className="mt-2 text-white/95 text-base" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>We detect aflatoxin-contaminated dried figs through image analysis techniques. Our system classifies figs based on visual characteristics under specific lighting conditions — particularly UV light, where aflatoxin contamination typically causes yellowish fluorescence.</p>
             <div className="mt-4 grid sm:grid-cols-2 gap-4">
@@ -108,7 +108,7 @@ export default function Full3DPageClient() {
                 { name: "Machine Learning", desc: "Automated classification and scoring" },
                 { name: "Visual Analysis", desc: "Image processing and pattern recognition" },
               ].map((t) => (
-                <div key={t.name} className="p-5 rounded-lg border border-white/20 bg-[color:rgb(45,28,16)/0.5] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(45,28,16)/0.7]">
+                <div key={t.name} className="p-5 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7]">
                   <div className="text-white font-medium text-lg" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>{t.name}</div>
                   <div className="text-white/95 text-sm" style={{textShadow:"0 1px 6px rgba(0,0,0,0.6)"}}>{t.desc}</div>
                 </div>
@@ -123,7 +123,7 @@ export default function Full3DPageClient() {
           </div>
 
           <div className="mx-auto max-w-7xl px-6 py-20 reveal">
-            <div className="rounded-xl border border-amber-200/25 bg-[color:rgb(35,22,12)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(25,15,8,0.8)]">
+            <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
             <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Team — Figion</h2>
             <p className="mt-2 text-white/95" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Interdisciplinary collaboration and shared ownership.</p>
             <div className="mt-2 text-white/95 text-sm" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Team members: <span className="font-medium text-white">{teamMembers.length}</span> • Advisor: <span className="font-medium text-white">{advisor ? 1 : 0}</span> • Jury: <span className="font-medium text-white">{juryMembers ? juryMembers.length : 0}</span></div>
@@ -135,7 +135,7 @@ export default function Full3DPageClient() {
                 {teamMembers.map((m) => (
                   <div 
                     key={m.name} 
-                    className="p-4 rounded-lg border border-white/20 bg-[color:rgb(45,28,16)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(45,28,16)/0.7] cursor-pointer"
+                    className="p-4 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7] cursor-pointer"
                     onClick={() => setSelectedMember(m)}
                   >
                     {m.avatarUrl ? (
@@ -167,7 +167,7 @@ export default function Full3DPageClient() {
                 <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👨‍🏫 Advisor</h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   <div 
-                    className="p-4 rounded-lg border border-white/20 bg-[color:rgb(45,28,16)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(45,28,16)/0.7] cursor-pointer"
+                    className="p-4 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7] cursor-pointer"
                     onClick={() => setSelectedAdvisor(advisor)}
                   >
                     {advisor.avatarUrl ? (
@@ -201,7 +201,7 @@ export default function Full3DPageClient() {
                   {juryMembers.map((m) => (
                     <div 
                       key={m.name} 
-                      className="p-4 rounded-lg border border-white/20 bg-[color:rgb(45,28,16)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(45,28,16)/0.7] cursor-pointer"
+                      className="p-4 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7] cursor-pointer"
                       onClick={() => setSelectedJuryMember(m)}
                     >
                       {m.avatarUrl ? (
@@ -232,7 +232,7 @@ export default function Full3DPageClient() {
 
           <div className="mx-auto max-w-7xl px-6 py-20 reveal">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-xl border border-white/20 bg-[color:rgb(50,30,18)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(20,12,8,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(50,30,18)/0.8] cursor-pointer" onClick={() => setSelectedReportOpen(true)}>
+              <div className="rounded-xl border border-white/20 bg-[color:rgb(38,26,66)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(10,8,20,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(38,26,66)/0.8] cursor-pointer" onClick={() => setSelectedReportOpen(true)}>
                 <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 2px 8px rgba(0,0,0,0.5)"}}>Analysis Reports</h2>
                 <p className="mt-2 text-white/90 text-sm" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>Aflatoxin analysis and quality control reports.</p>
                 <ul className="mt-3 text-white/90 text-sm list-disc ms-5 space-y-1">
@@ -243,7 +243,7 @@ export default function Full3DPageClient() {
                 </ul>
                 <p className="mt-2 text-white/70 text-xs">Folder: <code className="font-mono">public/pdfs</code></p>
               </div>
-              <div className="rounded-xl border border-white/20 bg-[color:rgb(50,30,18)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(20,12,8,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(50,30,18)/0.8]">
+              <div className="rounded-xl border border-white/20 bg-[color:rgb(38,26,66)/0.6] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(10,8,20,0.7)] transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(38,26,66)/0.8]">
                 <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 2px 8px rgba(0,0,0,0.5)"}}>Visual Analysis</h2>
                 <p className="mt-2 text-white/90 text-sm" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>Pipeline: UV fluorescence detection → background removal → defect detection → color-space metrics → aflatoxin risk classification.</p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
@@ -261,7 +261,7 @@ export default function Full3DPageClient() {
           </div>
 
           <div className="mx-auto max-w-6xl px-6 py-20 reveal">
-            <div className="rounded-xl border border-amber-200/25 bg-[color:rgb(35,22,12)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(25,15,8,0.8)]">
+            <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
             <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Sustainable Development Goals</h2>
             <p className="mt-2 text-white/95" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>The project is framed through food safety and sustainable agriculture.</p>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -286,7 +286,7 @@ export default function Full3DPageClient() {
         >
           <div className="absolute inset-0 bg-black/80" />
           <div
-            className="relative max-w-lg w-full rounded-xl border border-white/20 bg-[color:rgb(45,28,16)/0.9] backdrop-blur-md p-6 shadow-[0_15px_50px_rgba(20,12,8,0.8)]"
+            className="relative max-w-lg w-full rounded-xl border border-white/20 bg-[color:rgb(34,22,54)/0.9] backdrop-blur-md p-6 shadow-[0_15px_50px_rgba(10,8,20,0.8)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-4">
@@ -369,7 +369,7 @@ export default function Full3DPageClient() {
         >
           <div className="absolute inset-0 bg-black/80" />
           <div
-            className="relative max-w-lg w-full rounded-xl border border-white/20 bg-[color:rgb(45,28,16)/0.9] backdrop-blur-md p-6 shadow-[0_15px_50px_rgba(20,12,8,0.8)]"
+            className="relative max-w-lg w-full rounded-xl border border-white/20 bg-[color:rgb(34,22,54)/0.9] backdrop-blur-md p-6 shadow-[0_15px_50px_rgba(10,8,20,0.8)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-4">
@@ -532,7 +532,7 @@ export default function Full3DPageClient() {
       {selectedVisual && (
         <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center p-4" onClick={() => setSelectedVisual(null)}>
           <div className="absolute inset-0 bg-black/80" />
-          <div className="relative max-w-3xl w-full rounded-xl border border-white/20 bg-[color:rgb(45,28,16)/0.9] backdrop-blur-md p-4 shadow-[0_15px_50px_rgba(20,12,8,0.8)]" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-3xl w-full rounded-xl border border-white/20 bg-[color:rgb(34,22,54)/0.9] backdrop-blur-md p-4 shadow-[0_15px_50px_rgba(10,8,20,0.8)]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-3">
               <h2 className="text-white text-lg font-semibold">Visual Preview</h2>
               <button type="button" className="ms-auto text-white/80 hover:text-white text-sm border border-white/20 rounded px-3 py-1" onClick={() => setSelectedVisual(null)}>✕</button>

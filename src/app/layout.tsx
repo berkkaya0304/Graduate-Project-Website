@@ -30,15 +30,15 @@ export const metadata: Metadata = {
     siteName: "Figion",
     title: "Figion — Dried Fig Analysis",
     description: "Quality control and aflatoxin analysis for dried figs",
-    images: [{ url: "/logo.svg" }],
+    images: [{ url: "/logo.jpeg" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Figion — Dried Fig Analysis",
     description: "Quality control and aflatoxin analysis for dried figs",
-    images: ["/logo.svg"],
+    images: ["/logo.jpeg"],
   },
-  themeColor: "#0a0f1a",
+  themeColor: "#0f0a1a",
   applicationName: "Figion",
 };
 
