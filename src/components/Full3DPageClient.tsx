@@ -36,7 +36,7 @@ function FloatingParticles() {
 
 export default function Full3DPageClient({ initialPdfs = [] as { name: string; href: string }[] }: { initialPdfs?: { name: string; href: string }[] }) {
   const [mounted, setMounted] = useState(false);
-  const [pdfs, setPdfs] = useState<{ name: string; href: string }[]>(initialPdfs);
+  const [pdfs] = useState<{ name: string; href: string }[]>(initialPdfs);
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
   const [selectedAdvisor, setSelectedAdvisor] = useState<typeof advisor | null>(null);
   const [selectedJuryMember, setSelectedJuryMember] = useState<typeof juryMembers[0] | null>(null);
@@ -550,7 +550,7 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
               <object data={selectedPdf} type="application/pdf" className="w-full h-full rounded-lg overflow-hidden border border-white/15">
                 <embed src={selectedPdf} type="application/pdf" className="w-full h-full" />
                 <div className="p-4 text-white/80 text-sm">
-                  Couldn't render the PDF inline. Please use Open or Download.
+                  Couldn&apos;t render the PDF inline. Please use Open or Download.
                 </div>
               </object>
             </div>

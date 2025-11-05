@@ -7,7 +7,7 @@ export async function GET() {
   try {
     const pdfs = listPublicPdfs();
     return NextResponse.json({ pdfs });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ pdfs: [], error: "Failed to read PDFs" }, { status: 500 });
   }
 }
