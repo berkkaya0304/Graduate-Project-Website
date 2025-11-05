@@ -29,6 +29,7 @@ body {
     Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
     "Segoe UI Emoji";
   scroll-behavior: smooth;
+  margin: 0;
 }
 
 .container-page {

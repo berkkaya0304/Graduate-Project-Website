@@ -51,7 +51,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         {/* Header removed */}
-        <main className="container-page py-8">
+        <main className="container-page py-0">
           {children}
         </main>
         <footer className="mt-10 border-t border-[var(--border)]">
