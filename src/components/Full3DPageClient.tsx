@@ -524,6 +524,16 @@ export default function Full3DPageClient() {
               <li>Food Safety Assessment (PDF)</li>
             </ul>
             <p className="mt-3 text-white/80 text-xs">Files under <code className="font-mono">public/pdfs</code></p>
+            <div className="mt-4 flex flex-col gap-2">
+              <a
+                className="inline-flex items-center gap-2 text-sm border border-white/20 rounded px-3 py-2 text-white/90 hover:text-white hover:border-white/40 transition-colors"
+                href="/pdfs/CMPE%20491%20%E2%80%93%20Senior%20Design%20Project%20I.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>Project Proposal (PDF)</span>
+              </a>
+            </div>
           </div>
         </div>
       )}
