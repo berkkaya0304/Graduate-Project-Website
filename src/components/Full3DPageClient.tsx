@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { teamMembers, advisor, juryMembers } from "@/data/team";
+import { sprints } from "@/data/backlog";
 import Image from "next/image";
 
 
@@ -273,6 +274,53 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
                 </ul>
               </div>
           
+            </div>
+          </div>
+
+          <div className="mx-auto max-w-6xl px-6 py-20 reveal">
+            <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
+              <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Project Backlog</h2>
+              <p className="mt-2 text-white/95" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Track our progress through development sprints.</p>
+              
+              <div className="mt-6 space-y-6">
+                {sprints.map((sprint) => (
+                  <div key={sprint.id} className="rounded-lg border border-white/10 bg-[color:rgb(34,22,54)/0.4] p-4 transition-colors hover:bg-[color:rgb(34,22,54)/0.6]">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                      <div>
+                        <h3 className="text-white font-medium text-lg" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{sprint.title}</h3>
+                        <p className="text-white/70 text-sm">{sprint.goal}</p>
+                      </div>
+                      <span className={`px-2 py-1 rounded text-xs font-medium border ${
+                        sprint.status === 'completed' ? 'bg-green-500/10 border-green-500/20 text-green-200' :
+                        sprint.status === 'current' ? 'bg-violet-500/20 border-violet-500/30 text-violet-200' :
+                        'bg-gray-500/10 border-gray-500/20 text-gray-400'
+                      }`}>
+                        {sprint.status.toUpperCase()}
+                      </span>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      {sprint.items.map((item) => (
+                        <div key={item.id} className="flex items-center gap-3 bg-black/20 rounded px-3 py-2 border border-white/5 hover:border-white/10 transition-colors">
+                          <div className={`w-2 h-2 rounded-full shadow-[0_0_8px_currentColor] ${
+                            item.status === 'done' ? 'bg-green-400 text-green-400' :
+                            item.status === 'in-progress' ? 'bg-violet-400 text-violet-400' :
+                            'bg-gray-500 text-gray-500'
+                          }`} />
+                          <span className={`text-sm flex-1 ${item.status === 'done' ? 'text-white/50 line-through' : 'text-white/90'}`}>
+                            {item.title}
+                          </span>
+                          {item.assignee && (
+                            <span className="text-[10px] text-white/50 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                              {item.assignee}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
