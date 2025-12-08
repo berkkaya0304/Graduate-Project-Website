@@ -10,6 +10,11 @@ export const teamMembers: Member[] = [
     github: "https://github.com/berkkaya0304",
     linkedin: "https://www.linkedin.com/in/berkkaya",
     responsibilities: [
+      "Frontend Development",
+      "Website Maintenance",
+      "Data Gathering",
+      "DevOps - Cloud Computing",
+      "Documentation",
     ],
 
     bio: "Senior Computer Engineering student at TED University",
@@ -19,7 +24,12 @@ export const teamMembers: Member[] = [
     role: "Project Member",
     avatarUrl: "/members/2.jpg",
     email: "onur.turan@tedu.edu.tr",
-    responsibilities: [""],
+    responsibilities: [
+      "Data Gathering",
+      "Image Processing",
+      "AI Model Training",
+      "Documentation",
+    ],
 
     bio: "Senior Computer Engineering student at TED University",
   },
@@ -28,7 +38,13 @@ export const teamMembers: Member[] = [
     role: "Project Member",
     avatarUrl: "/members/5.jpg",
     email: "alperen.aktas@tedu.edu.tr",
-    responsibilities: [""],
+    responsibilities: [
+      "AI Model Training",
+      "Quality Assurance",
+      "Testing",
+      "Data Gathering",
+      "Documentation",
+    ],
 
     bio: "Senior Computer Engineering student at TED University",
   },
@@ -37,7 +53,13 @@ export const teamMembers: Member[] = [
       role: "Project Member",
     avatarUrl: "/members/4.jpg",
     email: "irem.ucankale@tedu.edu.tr",
-    responsibilities: [""],
+    responsibilities: [
+      "AI/ML Engineering",
+      "Image Processing",
+      "Data Pipeline",
+      "Data Gathering",
+      "Documentation",
+    ],
 
     bio: "Senior Computer Engineering student at TED University",
   },
@@ -46,7 +68,12 @@ export const teamMembers: Member[] = [
     role: "Project Member",
     avatarUrl: "/members/3.jpg",
     email: "ilhan.un@tedu.edu.tr",
-    responsibilities: [""],
+    responsibilities: [
+      "Database Management",
+      "Data Gathering",
+      "AI/ML Engineering",
+      "Documentation",
+    ],
 
     bio: "Senior Computer Engineering student at TED University",
   },
