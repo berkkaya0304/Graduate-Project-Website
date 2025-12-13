@@ -6,19 +6,19 @@ import Image from "next/image";
 
 
 function FloatingParticles() {
-  const particles = Array.from({ length: 28 });
+  const particles = Array.from({ length: 14 });
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       {particles.map((_, i) => {
-        const size = 2 + ((i * 7) % 6);
+        const size = 3 + ((i * 7) % 6);
         const left = (i * 37) % 100;
-        const duration = 18 + ((i * 13) % 16);
+        const duration = 20 + ((i * 13) % 15);
         const delay = -((i * 3) % 20);
-        const opacity = 0.15 + ((i * 5) % 10) / 100;
+        const opacity = 0.2 + ((i * 5) % 10) / 100;
         return (
           <span
             key={i}
-            className="absolute rounded-full bg-violet-200/60 shadow-[0_0_12px_rgba(124,58,237,0.4)] particle"
+            className="absolute rounded-full bg-violet-300/40 particle"
             style={{
               left: `${left}%`,
               width: size,
@@ -223,6 +223,27 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
                 </div>
               </div>
             )}
+            </div>
+          </div>
+
+          {/* Partners Section */}
+          <div className="mx-auto max-w-6xl px-6 py-20 reveal">
+            <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
+              <h2 className="text-white text-2xl font-semibold text-center mb-8" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Partners & Collaborators</h2>
+              <div className="flex flex-wrap justify-center items-center gap-8">
+                <a href="https://famagida.com" target="_blank" rel="noreferrer" className="group relative flex flex-col items-center gap-4 transition-transform duration-300 hover:scale-105">
+                  <div className="relative h-32 w-64 rounded-xl bg-white/5 border border-white/10 p-4 transition-colors group-hover:bg-white/10">
+                    <Image 
+                      alt="Fama Gıda" 
+                      src="/partners/fama_logo.png" 
+                      fill 
+                      className="object-contain p-2 opacity-80 transition-all duration-300 group-hover:opacity-100" 
+                      unoptimized 
+                    />
+                  </div>
+                  <span className="text-white/80 text-sm font-medium tracking-wide">Fama Gıda</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -572,7 +593,6 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
       )}
 
       
-
       {/* Visual Image Popup Modal */}
       {selectedVisual && (
         <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center p-4" onClick={() => setSelectedVisual(null)}>
@@ -623,23 +643,14 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
       <style jsx global>{`
         ::-webkit-scrollbar { width: 0; height: 0; }
         * { scrollbar-width: none; }
-        /* Background gentle pan/zoom */
-        .bg-motion { animation: bgZoomPan 40s ease-in-out infinite alternate; transform-origin: center; }
-        @keyframes bgZoomPan {
-          0% { transform: scale(0.92) translate3d(0,0,0); }
-          50% { transform: scale(0.95) translate3d(1.5%, -1.5%, 0); }
-          100% { transform: scale(0.98) translate3d(-1.5%, 1.5%, 0); }
-        }
         /* Reveal on scroll */
-        .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-        .reveal-visible { opacity: 1; transform: translateY(0); }
+        .reveal { opacity: 0; transition: opacity .6s ease; }
+        .reveal-visible { opacity: 1; }
         /* Particles */
-        .particle { animation-name: particleRise, twinkle; animation-timing-function: linear, ease-in-out; animation-iteration-count: infinite, infinite; bottom: -10vh; }
+        .particle { will-change: transform; animation-name: particleRise, twinkle; animation-timing-function: linear, ease-in-out; animation-iteration-count: infinite, infinite; bottom: -10vh; }
         @keyframes particleRise { to { transform: translateY(-120vh); } }
         @keyframes twinkle { 0%,100% { filter: blur(0); opacity: .2; } 50% { filter: blur(1px); opacity: .4; } }
       `}</style>
     </div>
   );
 }
-
-
