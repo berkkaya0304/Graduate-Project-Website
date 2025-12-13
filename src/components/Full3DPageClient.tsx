@@ -231,7 +231,7 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
             <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
               <h2 className="text-white text-2xl font-semibold text-center mb-8" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Partners & Collaborators</h2>
               <div className="flex flex-wrap justify-center items-center gap-8">
-                <a href="https://famagida.com" target="_blank" rel="noreferrer" className="group relative flex flex-col items-center gap-4 transition-transform duration-300 hover:scale-105">
+                <a href="https://famagida.com.tr" target="_blank" rel="noreferrer" className="group relative flex flex-col items-center gap-4 transition-transform duration-300 hover:scale-105">
                   <div className="relative h-32 w-64 rounded-xl bg-white/5 border border-white/10 p-4 transition-colors group-hover:bg-white/10">
                     <Image 
                       alt="Fama Gıda" 
