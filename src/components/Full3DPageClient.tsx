@@ -303,44 +303,93 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
               <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Project Backlog</h2>
               <p className="mt-2 text-white/95" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Track our progress through development sprints.</p>
               
-              <div className="mt-6 space-y-6">
-                {sprints.map((sprint) => (
-                  <div key={sprint.id} className="rounded-lg border border-white/10 bg-[color:rgb(34,22,54)/0.4] p-4 transition-colors hover:bg-[color:rgb(34,22,54)/0.6]">
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                      <div>
-                        <h3 className="text-white font-medium text-lg" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{sprint.title}</h3>
-                        <p className="text-white/70 text-sm">{sprint.goal}</p>
-                      </div>
-                      <span className={`px-2 py-1 rounded text-xs font-medium border ${
-                        sprint.status === 'completed' ? 'bg-green-500/10 border-green-500/20 text-green-200' :
-                        sprint.status === 'current' ? 'bg-violet-500/20 border-violet-500/30 text-violet-200' :
-                        'bg-gray-500/10 border-gray-500/20 text-gray-400'
-                      }`}>
-                        {sprint.status.toUpperCase()}
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      {sprint.items.map((item) => (
-                        <div key={item.id} className="flex items-center gap-3 bg-black/20 rounded px-3 py-2 border border-white/5 hover:border-white/10 transition-colors">
-                          <div className={`w-2 h-2 rounded-full shadow-[0_0_8px_currentColor] ${
-                            item.status === 'done' ? 'bg-green-400 text-green-400' :
-                            item.status === 'in-progress' ? 'bg-violet-400 text-violet-400' :
-                            'bg-gray-500 text-gray-500'
-                          }`} />
-                          <span className={`text-sm flex-1 ${item.status === 'done' ? 'text-white/50 line-through' : 'text-white/90'}`}>
-                            {item.title}
-                          </span>
-                          {item.assignee && (
-                            <span className="text-[10px] text-white/50 bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                              {item.assignee}
-                            </span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+              <div className="mt-6 overflow-x-auto rounded-lg border border-white/10 bg-[color:rgb(34,22,54)/0.4]">
+                <table className="w-full text-left text-sm text-white/90">
+                  <thead className="bg-white/5 text-xs uppercase tracking-wider text-white/70">
+                    <tr>
+                      <th className="px-4 py-3 font-medium whitespace-nowrap">Task Name</th>
+                      <th className="px-4 py-3 font-medium text-center whitespace-nowrap hidden sm:table-cell">Story</th>
+                      <th className="px-4 py-3 font-medium text-center whitespace-nowrap hidden md:table-cell">Sprint Ready</th>
+                      <th className="px-4 py-3 font-medium text-center whitespace-nowrap">Priority</th>
+                      <th className="px-4 py-3 font-medium whitespace-nowrap">Status</th>
+                      <th className="px-4 py-3 font-medium text-center whitespace-nowrap">Pts</th>
+                      <th className="px-4 py-3 font-medium text-center whitespace-nowrap hidden lg:table-cell">Assigned</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {sprints.map((sprint) => (
+                      <React.Fragment key={sprint.id}>
+                        {/* Sprint Header Row */}
+                        <tr className="bg-white/10 backdrop-blur-sm">
+                          <td colSpan={7} className="px-4 py-3">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                              <div className="min-w-0">
+                                <span className="font-semibold text-violet-200 text-base">{sprint.title}</span>
+                                <span className="mx-2 text-white/40 hidden sm:inline">•</span>
+                                <span className="text-xs text-white/70 italic hidden sm:inline">{sprint.goal}</span>
+                                <div className="text-xs text-white/70 italic sm:hidden mt-1">{sprint.goal}</div>
+                              </div>
+                              <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wide border self-start sm:self-auto shrink-0 ${
+                                sprint.status === 'completed' ? 'border-green-500/30 text-green-300' :
+                                sprint.status === 'current' ? 'border-violet-500/30 text-violet-300' :
+                                'border-gray-500/30 text-gray-400'
+                              }`}>
+                                {sprint.status}
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                        {/* Task Rows */}
+                        {sprint.items.map((item) => (
+                          <tr key={item.id} className="group hover:bg-white/5 transition-colors">
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-3">
+                                <div className={`w-1.5 h-1.5 rounded-full shadow-[0_0_6px_currentColor] flex-shrink-0 ${
+                                  item.status === 'Complete' ? 'bg-green-400 text-green-400' :
+                                  item.status === 'In Progress' ? 'bg-blue-400 text-blue-400' :
+                                  'bg-gray-500 text-gray-500'
+                                }`} />
+                                <span className={`font-medium ${item.status === 'Complete' ? 'text-white/50 line-through' : 'text-white/95'}`}>
+                                  {item.title}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 text-center text-white/70 hidden sm:table-cell">
+                              {item.isStory ? 'Yes' : 'No'}
+                            </td>
+                            <td className="px-4 py-3 text-center text-white/70 hidden md:table-cell">
+                              {item.isSprintReady ? 'Yes' : 'No'}
+                            </td>
+                            <td className="px-4 py-3 text-center">
+                              <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-medium border ${
+                                item.priority === 'High' ? 'border-red-500/20 bg-red-500/10 text-red-200' :
+                                item.priority === 'Medium' ? 'border-yellow-500/20 bg-yellow-500/10 text-yellow-200' :
+                                'border-blue-500/20 bg-blue-500/10 text-blue-200'
+                              }`}>
+                                {item.priority}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3">
+                              <span className={`text-xs whitespace-nowrap ${
+                                item.status === 'Complete' ? 'text-green-300' :
+                                item.status === 'In Progress' ? 'text-blue-300' :
+                                'text-gray-400'
+                              }`}>
+                                {item.status}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3 text-center font-mono text-white/80">
+                              {item.storyPoints}
+                            </td>
+                            <td className="px-4 py-3 text-center text-white/70 hidden lg:table-cell">
+                              {item.assignedToSprint ? 'Yes' : 'No'}
+                            </td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
