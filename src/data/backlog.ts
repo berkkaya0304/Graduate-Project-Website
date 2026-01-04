@@ -127,12 +127,12 @@ export const sprints: Sprint[] = [
     id: 'sprint-3',
     title: 'Sprint 3: High-Level Design',
     goal: 'Design system architecture, subsystem decomposition, and hardware/software mapping.',
-    status: 'current',
+    status: 'completed',
     items: [
       { 
         id: '9', 
         title: 'High-Level Design Report (D6)', 
-        status: 'In Progress', 
+        status: 'Complete', 
         priority: 'High', 
         storyPoints: 13, 
         isStory: true, 
@@ -143,7 +143,7 @@ export const sprints: Sprint[] = [
       { 
         id: '10', 
         title: 'Design Subsystem Decomposition', 
-        status: 'In Progress', 
+        status: 'Complete', 
         priority: 'Medium', 
         storyPoints: 8, 
         isStory: true, 
@@ -154,7 +154,7 @@ export const sprints: Sprint[] = [
       { 
         id: '11', 
         title: 'Update Backlog Document (D7)', 
-        status: 'Not Started', 
+        status: 'Complete', 
         priority: 'Low', 
         storyPoints: 2, 
         isStory: false, 
@@ -168,38 +168,38 @@ export const sprints: Sprint[] = [
     id: 'sprint-4',
     title: 'Sprint 4: Final Presentation',
     goal: 'Showcase the Figion prototype and present results at the Year-end Exhibition.',
-    status: 'upcoming',
+    status: 'completed',
     items: [
       { 
         id: '12', 
         title: 'Oral Presentation (D8)', 
-        status: 'Not Started', 
+        status: 'Complete', 
         priority: 'High', 
         storyPoints: 8, 
         isStory: true, 
-        isSprintReady: false,
+        isSprintReady: true,
         assignedToSprint: true,
         assignee: 'Team' 
       },
       { 
         id: '13', 
         title: 'Poster Presentation', 
-        status: 'Not Started', 
+        status: 'Complete', 
         priority: 'Medium', 
         storyPoints: 5, 
         isStory: true, 
-        isSprintReady: false,
+        isSprintReady: true,
         assignedToSprint: true,
         assignee: 'Team' 
       },
       { 
         id: '14', 
         title: 'Final Prototype Demonstration', 
-        status: 'Not Started', 
+        status: 'Complete', 
         priority: 'High', 
         storyPoints: 21, 
         isStory: true, 
-        isSprintReady: false,
+        isSprintReady: true,
         assignedToSprint: true,
         assignee: 'Team' 
       },
