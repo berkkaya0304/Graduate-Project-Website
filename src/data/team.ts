@@ -79,16 +79,30 @@ export const teamMembers: Member[] = [
   },
 ];
 
-// Advisor
-export const advisor: Member = {
-  name: "Emin Kuğu",
-  role: "Advisor",
-  avatarUrl: "/members/6.jpg",
-  email: "emin.kugu@tedu.edu.tr",
-  responsibilities: ["Project advisory", "Technical guidance", "Academic evaluation"],
+// Advisors
+export const advisors: (Member & { project: string })[] = [
+  {
+    name: "Emin Kuğu",
+    role: "Advisor",
+    project: "Senior Project 1",
+    avatarUrl: "/members/6.jpg",
+    email: "emin.kugu@tedu.edu.tr",
+    responsibilities: ["Project advisory", "Technical guidance", "Academic evaluation"],
+    bio: "Dr. Emin Kuğu received his bachelor's degree from Istanbul University Computer Science Engineering Department, his master's degree from the Air Force Academy of Aeronautics and Space Technologies Institute Software Engineering, and his doctorate from Old Dominion University Electrical and Computer Engineering program. In addition to being a faculty member of the Department of Computer Engineering of the Air Force Academy, he worked as a part-time lecturer at different universities located in Istanbul and Ankara. He worked as a project manager in the Turkish Air Force Command Information System (HvBS) project and worked in software development processes of international defense projects. He has been working as a professor at TEDU in the Software Engineering Department as of May 2020",
+  },
+  {
+    name: "Gökçe Nur Yılmaz",
+    role: "Advisor",
+    project: "Senior Project 2",
+    avatarUrl: "/members/9.webp",
+    email: "gokce.yilmaz@tedu.edu.tr",
+    responsibilities: ["Project advisory", "Technical guidance", "Academic evaluation"],
+    bio: "Gokce Nur Yilmaz received her Ph.D. degree from the I-Lab Multimedia Communication Research Group, part of the Centre for Vision, Speech and Signal Processing, University of Surrey, UK, in 2011. She is a Professor at the Department of Computer Engineering and acts as the Head of the Department at TED University. Her entrepreneur and academic experience positions her to play a pivotal role in many multidisciplinary EU (e.g., Horizon, COST, etc.) and national (e.g., TUBITAK, Ministry of Transport and Infrastructure, etc.) projects. She is the author of many scholarly publications in high-impact international journals, book chapters, and conference proceedings in collaboration with prestigious authors. Her entrepreneurial initiatives support her to serve as an R&D advisor for many companies. She has been serving as an organizer and scientific committee member of many international conferences and workshops. She was elevated to the grade of Senior Member of the Institute of Electrical and Electronics Engineers (IEEE), which is held only by 10% of the IEEE members and reflects professional maturity and documented achievements of significance.",
+  },
+];
 
-  bio: "Dr. Emin Kuğu received his bachelor's degree from Istanbul University Computer Science Engineering Department, his master's degree from the Air Force Academy of Aeronautics and Space Technologies Institute Software Engineering, and his doctorate from Old Dominion University Electrical and Computer Engineering program. In addition to being a faculty member of the Department of Computer Engineering of the Air Force Academy, he worked as a part-time lecturer at different universities located in Istanbul and Ankara. He worked as a project manager in the Turkish Air Force Command Information System (HvBS) project and worked in software development processes of international defense projects. He has been working as a professor at TEDU in the Software Engineering Department as of May 2020",
-};
+// Keep backward-compat alias (first advisor = SP1)
+export const advisor = advisors[0];
 
 // Jury members
 export const juryMembers: Member[] = [

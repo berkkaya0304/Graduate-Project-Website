@@ -12,6 +12,7 @@ export type Member = {
   linkedin?: string;
   skills?: string[];
   bio?: string;
+  project?: string;
 };
 
 function slugify(name: string) {
@@ -21,12 +22,15 @@ function slugify(name: string) {
 export default function TeamClient({ 
   members, 
   advisor, 
+  advisors,
   juryMembers 
 }: { 
   members: Member[]; 
   advisor?: Member; 
+  advisors?: Member[];
   juryMembers?: Member[]; 
 }) {
+  const resolvedAdvisors = advisors ?? (advisor ? [advisor] : []);
   const [query, setQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("All");
   const [sortBy, setSortBy] = useState<"name" | "role">("name");
@@ -212,82 +216,91 @@ export default function TeamClient({
         </div>
       </section>
 
-      {/* Advisor */}
-      {advisor && (
+      {/* Advisors */}
+      {resolvedAdvisors.length > 0 && (
         <section className="card p-6">
-          <h2 className="text-xl font-semibold mb-4">Advisor</h2>
-          <div className="card p-5">
-            <div className="flex items-start gap-3">
-              {advisor.avatarUrl ? (
-                <Image
-                  alt={advisor.name}
-                  src={advisor.avatarUrl}
-                  width={48}
-                  height={48}
-                  className="size-12 rounded-full bg-[var(--muted)] object-contain p-1"
-                  unoptimized
-                />
-              ) : (
-                <div className="size-12 rounded-full bg-[var(--muted)] grid place-items-center text-sm opacity-80">
-                  {advisor.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
-                </div>
-              )}
-              <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <h3 className="font-medium truncate">{advisor.name}</h3>
-                    <p className="opacity-80 text-sm truncate">{advisor.role}</p>
-                    {advisor.email ? (
-                      <div className="mt-1 flex items-center gap-2">
-                        <a
-                          className="text-[var(--color-primary-600)] text-sm truncate hover:underline"
-                          href={`mailto:${advisor.email}`}
+          <h2 className="text-xl font-semibold mb-4">Advisors ({resolvedAdvisors.length})</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {resolvedAdvisors.map((m) => (
+              <article key={m.name} className="card p-5">
+                <div className="flex items-start gap-3">
+                  {m.avatarUrl ? (
+                    <Image
+                      alt={m.name}
+                      src={m.avatarUrl}
+                      width={48}
+                      height={48}
+                      className="size-12 rounded-full bg-[var(--muted)] object-contain p-1"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="size-12 rounded-full bg-[var(--muted)] grid place-items-center text-sm opacity-80">
+                      {m.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <h3 className="font-medium truncate">{m.name}</h3>
+                        <p className="opacity-80 text-sm truncate">{m.role}</p>
+                        {m.project ? (
+                          <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full border border-[var(--color-primary-600)] text-[var(--color-primary-600)]">
+                            {m.project}
+                          </span>
+                        ) : null}
+                        {m.email ? (
+                          <div className="mt-1 flex items-center gap-2">
+                            <a
+                              className="text-[var(--color-primary-600)] text-sm truncate hover:underline"
+                              href={`mailto:${m.email}`}
+                            >
+                              {m.email}
+                            </a>
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                          onClick={() => setSelected(m)}
+                          aria-haspopup="dialog"
+                          aria-expanded={selected?.name === m.name}
+                          aria-controls={`member-${m.name.replace(/\s+/g, "-")}-dialog`}
                         >
-                          {advisor.email}
+                          Details
+                        </button>
+                        <a
+                          className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
+                          href={`/team/${slugify(m.name)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Open in new window"
+                        >
+                          Open
                         </a>
                       </div>
+                    </div>
+
+                    {m.skills && m.skills.length > 0 ? (
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {m.skills.map((s) => (
+                          <span key={s} className="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] bg-[color:var(--muted)/0.6]">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
                     ) : null}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
-                      onClick={() => setSelected(advisor)}
-                      aria-haspopup="dialog"
-                      aria-expanded={selected?.name === advisor.name}
-                      aria-controls={`member-${advisor.name.replace(/\s+/g, "-")}-dialog`}
-                    >
-                      Details
-                    </button>
-                    <a
-                      className="text-sm border border-[var(--color-border)] rounded px-2 py-1 hover:border-[var(--color-primary-600)]"
-                      href={`/team/${slugify(advisor.name)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Open in new window"
-                    >
-                      Open
-                    </a>
+
+                    <ul className="list-disc ms-5 mt-3 text-sm opacity-90 space-y-1">
+                      {m.responsibilities.map((r) => (
+                        <li key={r}>{r}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-
-                {advisor.skills && advisor.skills.length > 0 ? (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {advisor.skills.map((s) => (
-                      <span key={s} className="text-xs px-2 py-1 rounded-full border border-[var(--color-border)] bg-[color:var(--muted)/0.6]">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-
-                <ul className="list-disc ms-5 mt-3 text-sm opacity-90 space-y-1">
-                  {advisor.responsibilities.map((r) => (
-                    <li key={r}>{r}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
         </section>
       )}

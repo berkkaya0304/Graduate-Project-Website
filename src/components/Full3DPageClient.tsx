@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { teamMembers, advisor, juryMembers } from "@/data/team";
+import { teamMembers, advisors, juryMembers } from "@/data/team";
 import { sprints } from "@/data/backlog";
 import Image from "next/image";
 
@@ -39,7 +39,7 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
   const [mounted, setMounted] = useState(false);
   const [pdfs] = useState<{ name: string; href: string }[]>(initialPdfs);
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
-  const [selectedAdvisor, setSelectedAdvisor] = useState<typeof advisor | null>(null);
+  const [selectedAdvisor, setSelectedAdvisor] = useState<typeof advisors[0] | null>(null);
   const [selectedJuryMember, setSelectedJuryMember] = useState<typeof juryMembers[0] | null>(null);
   const [selectedVisual, setSelectedVisual] = useState<string | null>(null);
   const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
@@ -122,7 +122,7 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
             <div className="rounded-xl border border-violet-200/25 bg-[color:rgb(24,16,36)/0.75] backdrop-blur-md p-6 shadow-[0_12px_45px_rgba(12,8,20,0.8)]">
             <h2 className="text-white text-2xl font-semibold" style={{textShadow:"0 3px 10px rgba(0,0,0,0.7)"}}>Team — Figion</h2>
             <p className="mt-2 text-white/95" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Interdisciplinary collaboration and shared ownership.</p>
-            <div className="mt-2 text-white/95 text-sm" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Team members: <span className="font-medium text-white">{teamMembers.length}</span> • Advisor: <span className="font-medium text-white">{advisor ? 1 : 0}</span> • Jury: <span className="font-medium text-white">{juryMembers ? juryMembers.length : 0}</span></div>
+            <div className="mt-2 text-white/95 text-sm" style={{textShadow:"0 2px 8px rgba(0,0,0,0.6)"}}>Team members: <span className="font-medium text-white">{teamMembers.length}</span> • Advisors: <span className="font-medium text-white">{advisors.length}</span> • Jury: <span className="font-medium text-white">{juryMembers ? juryMembers.length : 0}</span></div>
             
             {/* Main Team Members Section */}
             <div className="mt-6">
@@ -157,34 +157,40 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
               </div>
             </div>
             
-            {/* Advisor Section */}
-            {advisor && (
+            {/* Advisors Section */}
+            {advisors.length > 0 && (
               <div className="mt-6">
-                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👨‍🏫 Advisor</h3>
+                <h3 className="text-white text-lg font-medium mb-3" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>👨‍🏫 Advisors</h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  <div 
-                    className="p-4 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7] cursor-pointer"
-                    onClick={() => setSelectedAdvisor(advisor)}
-                  >
-                    {advisor.avatarUrl ? (
-                      <Image alt={advisor.name} src={advisor.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
-                    ) : (
-                      <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
-                        {advisor.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
-                      </div>
-                    )}
-                    <div className="min-w-0">
-                      <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{advisor.name}</div>
-                      <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{advisor.role}</div>
-                      {advisor.skills && advisor.skills.length ? (
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {advisor.skills.slice(0,4).map((s) => (
-                            <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
-                          ))}
+                  {advisors.map((adv) => (
+                    <div 
+                      key={adv.name}
+                      className="p-4 rounded-lg border border-white/20 bg-[color:rgb(34,22,54)/0.5] flex items-start gap-3 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[color:rgb(34,22,54)/0.7] cursor-pointer"
+                      onClick={() => setSelectedAdvisor(adv)}
+                    >
+                      {adv.avatarUrl ? (
+                        <Image alt={adv.name} src={adv.avatarUrl} width={40} height={40} className="size-10 rounded-full bg-white/10 object-cover" unoptimized />
+                      ) : (
+                        <div className="size-10 rounded-full bg-white/10 grid place-items-center text-xs text-white/70">
+                          {adv.name.split(" ").map((p) => p[0]).slice(0,2).join("")}
                         </div>
-                      ) : null}
+                      )}
+                      <div className="min-w-0">
+                        <div className="text-white font-medium truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{adv.name}</div>
+                        <div className="text-white/90 text-sm truncate" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{adv.role}</div>
+                        {adv.project ? (
+                          <span className="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full border border-violet-400/50 text-violet-300">{adv.project}</span>
+                        ) : null}
+                        {adv.skills && adv.skills.length ? (
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {adv.skills.slice(0,4).map((s) => (
+                              <span key={s} className="text-[10px] px-2 py-0.5 rounded-full border border-white/20 text-white/90" style={{textShadow:"0 1px 6px rgba(0,0,0,0.5)"}}>{s}</span>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -323,9 +329,14 @@ export default function Full3DPageClient({ initialPdfs = [] as { name: string; h
                         <tr className="bg-white/10 backdrop-blur-sm">
                           <td colSpan={7} className="px-4 py-3">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                              <div className="min-w-0">
+                              <div className="min-w-0 flex items-center gap-2 flex-wrap">
+                                <span className={`text-[10px] px-2 py-0.5 rounded-full border font-semibold shrink-0 ${
+                                  sprint.project === 'Senior Project 1'
+                                    ? 'border-blue-400/40 text-blue-300'
+                                    : 'border-fuchsia-400/40 text-fuchsia-300'
+                                }`}>{sprint.project}</span>
                                 <span className="font-semibold text-violet-200 text-base">{sprint.title}</span>
-                                <span className="mx-2 text-white/40 hidden sm:inline">•</span>
+                                <span className="mx-1 text-white/40 hidden sm:inline">•</span>
                                 <span className="text-xs text-white/70 italic hidden sm:inline">{sprint.goal}</span>
                                 <div className="text-xs text-white/70 italic sm:hidden mt-1">{sprint.goal}</div>
                               </div>

@@ -16,11 +16,13 @@ export interface Sprint {
   goal: string;
   items: BacklogItem[];
   status: 'current' | 'upcoming' | 'completed';
+  project: 'Senior Project 1' | 'Senior Project 2';
 }
 
 export const sprints: Sprint[] = [
   {
     id: 'sprint-1',
+    project: 'Senior Project 1',
     title: 'Sprint 1: Proposal & Specifications',
     goal: 'Define project scope, constraints, and initial requirements for Figion.',
     status: 'completed',
@@ -84,6 +86,7 @@ export const sprints: Sprint[] = [
   },
   {
     id: 'sprint-2',
+    project: 'Senior Project 1',
     title: 'Sprint 2: System Analysis',
     goal: 'Analyze requirements for the UV imaging and deep learning pipeline.',
     status: 'completed',
@@ -125,6 +128,7 @@ export const sprints: Sprint[] = [
   },
   {
     id: 'sprint-3',
+    project: 'Senior Project 1',
     title: 'Sprint 3: High-Level Design',
     goal: 'Design system architecture, subsystem decomposition, and hardware/software mapping.',
     status: 'completed',
@@ -166,6 +170,7 @@ export const sprints: Sprint[] = [
   },
   {
     id: 'sprint-4',
+    project: 'Senior Project 1',
     title: 'Sprint 4: Final Presentation',
     goal: 'Showcase the Figion prototype and present results at the Year-end Exhibition.',
     status: 'completed',
@@ -202,6 +207,102 @@ export const sprints: Sprint[] = [
         isSprintReady: true,
         assignedToSprint: true,
         assignee: 'Team' 
+      },
+    ]
+  },
+  // ── Senior Project 2 ─────────────────────────────────────────────────────
+  {
+    id: 'sp2-sprint-1',
+    project: 'Senior Project 2',
+    title: 'Sprint 5: Implementation Phase I',
+    goal: 'Begin development of the aflatoxin detection model and data pipeline.',
+    status: 'current',
+    items: [
+      {
+        id: 'sp2-1',
+        title: 'Dataset Collection & Annotation',
+        status: 'In Progress',
+        priority: 'High',
+        storyPoints: 13,
+        isStory: true,
+        isSprintReady: true,
+        assignedToSprint: true,
+        assignee: 'Team'
+      },
+      {
+        id: 'sp2-2',
+        title: 'UV Imaging Pipeline Setup',
+        status: 'In Progress',
+        priority: 'High',
+        storyPoints: 8,
+        isStory: true,
+        isSprintReady: true,
+        assignedToSprint: true,
+        assignee: 'Team'
+      },
+      {
+        id: 'sp2-3',
+        title: 'Model Training — Baseline',
+        status: 'Not Started',
+        priority: 'High',
+        storyPoints: 13,
+        isStory: true,
+        isSprintReady: true,
+        assignedToSprint: true,
+        assignee: 'Team'
+      },
+      {
+        id: 'sp2-4',
+        title: 'Implementation Report (D1)',
+        status: 'Not Started',
+        priority: 'Medium',
+        storyPoints: 5,
+        isStory: false,
+        isSprintReady: true,
+        assignedToSprint: true,
+        assignee: 'Team'
+      },
+    ]
+  },
+  {
+    id: 'sp2-sprint-2',
+    project: 'Senior Project 2',
+    title: 'Sprint 6: Implementation Phase II',
+    goal: 'Refine the model, conduct testing, and prepare for the final demo.',
+    status: 'upcoming',
+    items: [
+      {
+        id: 'sp2-5',
+        title: 'Model Evaluation & Fine-tuning',
+        status: 'Not Started',
+        priority: 'High',
+        storyPoints: 13,
+        isStory: true,
+        isSprintReady: false,
+        assignedToSprint: false,
+        assignee: 'Team'
+      },
+      {
+        id: 'sp2-6',
+        title: 'Integration Testing',
+        status: 'Not Started',
+        priority: 'High',
+        storyPoints: 8,
+        isStory: true,
+        isSprintReady: false,
+        assignedToSprint: false,
+        assignee: 'Team'
+      },
+      {
+        id: 'sp2-7',
+        title: 'Final Report & Demo (D2)',
+        status: 'Not Started',
+        priority: 'High',
+        storyPoints: 13,
+        isStory: true,
+        isSprintReady: false,
+        assignedToSprint: false,
+        assignee: 'Team'
       },
     ]
   },
